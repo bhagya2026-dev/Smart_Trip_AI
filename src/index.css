@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    background-color: #0B1117;
+    color: #E6F1FF;
+    font-family: 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Centralized Cyber Green Dark Theme Styles */
+
+/* Cards */
+.cyber-card {
+  background: linear-gradient(180deg, #16212B 0%, #111A23 100%);
+  border: 1px solid #1F2A37;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.cyber-card-hero {
+  background: linear-gradient(180deg, #16212B 0%, #111A23 100%);
+  border: 1px solid #1F2A37;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* Primary Electric Green Gradient Buttons */
+.btn-electric-green {
+  background: linear-gradient(135deg, #00E676 0%, #00B8D4 100%);
+  color: #0B1117;
+  font-weight: 700;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 230, 118, 0.25);
+  transition: all 0.25s ease-in-out;
+}
+
+.btn-electric-green:hover {
+  box-shadow: 0 0 18px rgba(0, 230, 118, 0.45);
+  transform: translateY(-1px);
+}
+
+.btn-secondary-green {
+  background: transparent;
+  border: 1px solid #00E676;
+  color: #00E676;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all 0.25s ease-in-out;
+}
+
+.btn-secondary-green:hover {
+  background: rgba(0, 230, 118, 0.1);
+  box-shadow: 0 0 10px rgba(0, 230, 118, 0.2);
+}
+
+.btn-danger-red {
+  background: #FF5252;
+  color: #FFFFFF;
+  border-radius: 12px;
+  font-weight: 700;
+  box-shadow: 0 0 12px rgba(255, 82, 82, 0.3);
+}
+
+/* Inputs & Form Fields */
+.cyber-input {
+  background-color: #111A23;
+  border: 1px solid #1F2A37;
+  color: #E6F1FF;
+  border-radius: 12px;
+  transition: all 0.2s ease-in-out;
+}
+
+.cyber-input::placeholder {
+  color: #9FB3C8;
+}
+
+.cyber-input:focus {
+  border-color: #00E676;
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 230, 118, 0.25);
+}
+
+/* Status Badges */
+.badge-live {
+  background: rgba(0, 230, 118, 0.15);
+  color: #00E676;
+  border: 1px solid rgba(0, 230, 118, 0.4);
+  box-shadow: 0 0 10px rgba(0, 230, 118, 0.2);
+}
+
+.badge-warning {
+  background: rgba(255, 193, 7, 0.15);
+  color: #FFC107;
+  border: 1px solid rgba(255, 193, 7, 0.4);
+}
+
+.badge-danger {
+  background: rgba(255, 82, 82, 0.15);
+  color: #FF5252;
+  border: 1px solid rgba(255, 82, 82, 0.4);
+}
+
+/* Leaflet Container & Markers */
+.leaflet-container {
+  background: #0B1117 !important;
+  font-family: inherit;
+  border-radius: 12px;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #111A23 !important;
+  color: #E6F1FF !important;
+  border: 1px solid #1F2A37;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.leaflet-popup-tip {
+  background: #111A23 !important;
+}
+
+/* Range Sliders */
+input[type="range"] {
+  accent-color: #00E676;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #0B1117;
+}
+::-webkit-scrollbar-thumb {
+  background: #1F2A37;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00E676;
+}
