@@ -1,5 +1,6 @@
 import 'dart:math';
 import '../../domain/models/telemetry.dart';
+import '../../domain/models/destination.dart';
 
 List<TelemetryPoint> generateMockPolylinePoints(
   double startLat,
@@ -113,5 +114,40 @@ final List<Trip> initialMockTrips = [
       ),
     ],
     telemetryPoints: generateMockPolylinePoints(6.9271, 79.8612, 6.8950, 79.8580, 25),
+  ),
+];
+
+final List<Destination> mockDestinations = [
+  Destination(
+    id: 'dest-lk-1',
+    name: 'Thalpitiya',
+    city: 'Wadduwa',
+    distanceKmEst: 3.0,
+    latitude: 6.67,
+    longitude: 79.93,
+  ),
+  Destination(
+    id: 'dest-lk-2',
+    name: 'Wadduwa Beach',
+    city: 'Wadduwa',
+    distanceKmEst: 33.0,
+    latitude: 6.65,
+    longitude: 79.94,
+  ),
+  Destination(
+    id: 'dest-lk-3',
+    name: 'Panadura Town',
+    city: 'Panadura',
+    distanceKmEst: 27.0,
+    latitude: 6.71,
+    longitude: 79.90,
+  ),
+  Destination(
+    id: 'dest-lk-4',
+    name: 'Kalutara Bodhiya',
+    city: 'Kalutara',
+    distanceKmEst: 43.0,
+    latitude: 6.58,
+    longitude: 79.95,
   ),
 ];
