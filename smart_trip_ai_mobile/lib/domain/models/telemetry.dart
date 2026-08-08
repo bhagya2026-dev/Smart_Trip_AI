@@ -133,6 +133,24 @@ class VehicleConfig {
     required this.idleConsumptionRateLph,
     required this.fuelPricePerLiter,
   });
+
+  VehicleConfig copyWith({
+    String? vehicleName,
+    VehicleType? vehicleType,
+    FuelType? fuelType,
+    double? engineSizeLiters,
+    double? idleConsumptionRateLph,
+    double? fuelPricePerLiter,
+  }) {
+    return VehicleConfig(
+      vehicleName: vehicleName ?? this.vehicleName,
+      vehicleType: vehicleType ?? this.vehicleType,
+      fuelType: fuelType ?? this.fuelType,
+      engineSizeLiters: engineSizeLiters ?? this.engineSizeLiters,
+      idleConsumptionRateLph: idleConsumptionRateLph ?? this.idleConsumptionRateLph,
+      fuelPricePerLiter: fuelPricePerLiter ?? this.fuelPricePerLiter,
+    );
+  }
 }
 
 enum TripStatus { active, completed }
