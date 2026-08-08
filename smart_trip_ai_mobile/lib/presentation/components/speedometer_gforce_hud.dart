@@ -112,7 +112,7 @@ class SpeedometerGForceHUD extends StatelessWidget {
                     ),
                     child: Text(
                       isWalking
-                          ? 'PEAK: \${maxSpeedKmH > 0 ? (maxSpeedKmH * 0.1).toStringAsFixed(1) : '5.2'} KM/H'
+                          ? "PEAK: \${maxSpeedKmH > 0 ? (maxSpeedKmH * 0.1).toStringAsFixed(1) : '5.2'} KM/H"
                           : 'MAX: \${maxSpeedKmH.round()} KM/H',
                       style: TextStyle(
                         color: isWalking ? const Color(0xFF00B8D4) : const Color(0xFF00E676),
