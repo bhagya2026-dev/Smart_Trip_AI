@@ -33,22 +33,56 @@ class HomeView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // 0. Weather Widget
+            _buildWeatherWidget(),
+            const SizedBox(height: 16),
+
             // 1. Futuristic Animated Hero Banner Card
             _buildHeroCard(),
-            const SizedBox(height: 24),
+            const SizedBox(height: 16),
 
             // 2. Quick Stat Overview Cards
             _buildStatOverviewCards(totalTripsCount, totalDistanceKm, avgSafetyScore, totalIdleCost),
-            const SizedBox(height: 24),
+            const SizedBox(height: 16),
 
             // 3. Popular Sri Lanka Destinations Cards
             _buildDestinations(),
-            const SizedBox(height: 24),
+            const SizedBox(height: 16),
 
             // 4. Conversational AI Assistant Banner Teaser
             _buildAITeaser(),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildWeatherWidget() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: BoxDecoration(
+        color: Colors.black,
+        border: Border.all(color: const Color(0xFF333333)),
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              const Icon(LucideIcons.sun, color: Colors.yellow, size: 24),
+              const SizedBox(width: 12),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  Text('Colombo, Sri Lanka', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12)),
+                  Text('Sunny • 32°C', style: TextStyle(color: Colors.grey, fontSize: 10)),
+                ],
+              ),
+            ],
+          ),
+          const Text('Good Morning,\nKasun', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold), textAlign: TextAlign.right),
+        ],
       ),
     );
   }
@@ -216,9 +250,9 @@ class HomeView extends StatelessWidget {
       crossAxisCount: 2,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      crossAxisSpacing: 12,
-      mainAxisSpacing: 12,
-      childAspectRatio: 1.5,
+      crossAxisSpacing: 8,
+      mainAxisSpacing: 8,
+      childAspectRatio: 2.2,
       children: [
         _buildStatCard(
           title: 'TOTAL TRIPS',
@@ -351,9 +385,9 @@ class HomeView extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            crossAxisSpacing: 12,
-            mainAxisSpacing: 12,
-            childAspectRatio: 1.3,
+            crossAxisSpacing: 8,
+            mainAxisSpacing: 8,
+            childAspectRatio: 1.8,
           ),
           itemBuilder: (context, index) {
             final dest = mockDestinations[index];

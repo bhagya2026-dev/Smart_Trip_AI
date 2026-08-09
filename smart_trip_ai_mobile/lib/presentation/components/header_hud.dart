@@ -1,5 +1,8 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:provider/provider.dart';
+import '../../providers/trip_provider.dart';
+import '../../providers/theme_provider.dart';
 import '../../providers/trip_provider.dart';
 
 class HeaderHUD extends StatelessWidget {
@@ -18,10 +21,13 @@ class HeaderHUD extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = context.read<ThemeProvider>();
+    final isDark = themeProvider.isDarkMode;
+
     return Container(
-      decoration: const BoxDecoration(
-        color: Colors.black, // 95% opacity
-        border: Border(bottom: BorderSide(color: Color(0xFF333333))),
+      decoration: BoxDecoration(
+        color: Theme.of(context).scaffoldBackgroundColor,
+        border: Border(bottom: BorderSide(color: Theme.of(context).dividerColor)),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
       child: SafeArea(
@@ -35,10 +41,10 @@ class HeaderHUD extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.onSurface,
                     borderRadius: BorderRadius.circular(4),
                   ),
-                  child: const Icon(Icons.share, color: Colors.black, size: 20),
+                  child: Icon(Icons.share, color: Theme.of(context).scaffoldBackgroundColor, size: 20),
                 ),
                 const SizedBox(width: 8),
                 Column(
@@ -47,7 +53,7 @@ class HeaderHUD extends StatelessWidget {
                     Row(
                       children: [
                         RichText(
-                          text: const TextSpan(
+                          text: TextSpan(
                             style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -55,8 +61,8 @@ class HeaderHUD extends StatelessWidget {
                             children: [
                               TextSpan(
                                   text: 'Smart',
-                                  style: TextStyle(color: Colors.white)),
-                              TextSpan(
+                                  style: TextStyle(color: Theme.of(context).colorScheme.onSurface)),
+                              const TextSpan(
                                   text: 'Trip',
                                   style: TextStyle(color: Colors.grey)),
                             ],
@@ -67,17 +73,17 @@ class HeaderHUD extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 6, vertical: 2),
                           decoration: BoxDecoration(
-                            color: Colors.black,
+                            color: Theme.of(context).scaffoldBackgroundColor,
                             border: Border.all(
-                                color: const Color(0xFF333333)),
+                                color: Theme.of(context).dividerColor),
                             borderRadius: BorderRadius.circular(4),
                           ),
-                          child: const Text(
+                          child: Text(
                             'AI',
                             style: TextStyle(
                               fontSize: 9,
                               fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                              color: Theme.of(context).colorScheme.onSurface,
                             ),
                           ),
                         ),
@@ -104,15 +110,15 @@ class HeaderHUD extends StatelessWidget {
                   children: [
                     RichText(
                       text: TextSpan(
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontSize: 12,
                             color: Colors.grey),
                         children: [
                           const TextSpan(text: 'TIME: '),
                           TextSpan(
                             text: _formatTimer(tripProvider.activeTripDurationSec),
-                            style: const TextStyle(
-                                color: Colors.white,
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.onSurface,
                                 fontWeight: FontWeight.bold),
                           ),
                         ],
@@ -120,15 +126,15 @@ class HeaderHUD extends StatelessWidget {
                     ),
                     RichText(
                       text: TextSpan(
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontSize: 12,
                             color: Colors.grey),
                         children: [
                           const TextSpan(text: 'IDLE: '),
                           TextSpan(
                             text: 'Rs. ${tripProvider.liveIdleCostPerMin.toStringAsFixed(2)}/m',
-                            style: const TextStyle(
-                                color: Colors.white,
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.onSurface,
                                 fontWeight: FontWeight.bold),
                           ),
                         ],
@@ -138,7 +144,6 @@ class HeaderHUD extends StatelessWidget {
                 ),
                 const SizedBox(width: 12),
 
-                // Live GPS Sensor Indicator Toggle
                 GestureDetector(
                   onTap: () {
                     tripProvider.toggleLiveGps();
@@ -146,9 +151,9 @@ class HeaderHUD extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(
-                      color: Colors.black,
+                      color: Theme.of(context).scaffoldBackgroundColor,
                       border: Border.all(
-                        color: const Color(0xFF333333),
+                        color: Theme.of(context).dividerColor,
                       ),
                       borderRadius: BorderRadius.circular(4),
                     ),
@@ -160,7 +165,7 @@ class HeaderHUD extends StatelessWidget {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: tripProvider.isLiveGpsActive
-                                ? Colors.white
+                                ? Theme.of(context).colorScheme.onSurface
                                 : Colors.grey,
                           ),
                         ),
@@ -171,11 +176,33 @@ class HeaderHUD extends StatelessWidget {
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
                             color: tripProvider.isLiveGpsActive
-                                ? Colors.white
+                                ? Theme.of(context).colorScheme.onSurface
                                 : Colors.grey,
                           ),
                         ),
                       ],
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+
+                // Theme Toggle Button
+                InkWell(
+                  onTap: () {
+                    themeProvider.toggleTheme();
+                  },
+                  borderRadius: BorderRadius.circular(12),
+                  child: Container(
+                    padding: const EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      border: Border.all(color: Theme.of(context).dividerColor),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Icon(
+                      isDark ? LucideIcons.sun : LucideIcons.moon,
+                      color: Theme.of(context).colorScheme.onSurface,
+                      size: 20,
                     ),
                   ),
                 ),
@@ -190,13 +217,13 @@ class HeaderHUD extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.all(6),
                     decoration: BoxDecoration(
-                      color: Colors.black,
-                      border: Border.all(color: const Color(0xFF333333)),
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      border: Border.all(color: Theme.of(context).dividerColor),
                       borderRadius: BorderRadius.circular(4),
                     ),
-                    child: const Icon(
+                    child: Icon(
                       LucideIcons.settings,
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.onSurface,
                       size: 20,
                     ),
                   ),
@@ -209,3 +236,4 @@ class HeaderHUD extends StatelessWidget {
     );
   }
 }
+

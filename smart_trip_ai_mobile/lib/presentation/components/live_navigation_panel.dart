@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import '../../domain/models/destination.dart';
 import '../../domain/models/telemetry.dart';
@@ -53,8 +53,8 @@ class LiveNavigationPanel extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.black,
-        border: Border.all(color: const Color(0xFF333333)),
+        color: Theme.of(context).scaffoldBackgroundColor,
+        border: Border.all(color: Theme.of(context).dividerColor),
         borderRadius: BorderRadius.circular(4),
       ),
       child: Column(
@@ -65,14 +65,14 @@ class LiveNavigationPanel extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const Icon(LucideIcons.milestone, color: Colors.white, size: 16),
+                  Icon(LucideIcons.milestone, color: Theme.of(context).colorScheme.onSurface, size: 16),
                   const SizedBox(width: 8),
                   Text(
                     isWalking ? 'LIVE PEDESTRIAN WALK TELEMETRY' : 'LIVE TRIP TELEMETRY & NAVIGATION',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.onSurface,
                       letterSpacing: 1.0,
                     ),
                   ),
@@ -82,20 +82,20 @@ class LiveNavigationPanel extends StatelessWidget {
                   Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
-                    color: Colors.black,
-                    border: Border.all(color: const Color(0xFF333333)),
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                    border: Border.all(color: Theme.of(context).dividerColor),
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Row(
                     children: [
-                      const Icon(LucideIcons.flag, color: Colors.white, size: 12),
+                      Icon(LucideIcons.flag, color: Theme.of(context).colorScheme.onSurface, size: 12),
                       const SizedBox(width: 4),
                       Text(
                         'DEST: ${destination!.name.isNotEmpty ? destination!.name : destination!.city}',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 10,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
                     ],
@@ -103,7 +103,7 @@ class LiveNavigationPanel extends StatelessWidget {
                 ),
             ],
           ),
-          const Divider(color: Color(0xFF333333), height: 24),
+          Divider(color: Theme.of(context).dividerColor, height: 24),
 
           // Grid Stats
           LayoutBuilder(
@@ -114,49 +114,53 @@ class LiveNavigationPanel extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
-                childAspectRatio: constraints.maxWidth > 600 ? 1.2 : 1.5,
+                childAspectRatio: constraints.maxWidth > 600 ? 2.5 : 2.5,
                 children: [
                   // 1. Past Distance Covered
                   _buildStatCard(
+                    context: context,
                     title: 'PAST COVERED',
                     icon: LucideIcons.navigation,
-                    iconColor: Colors.white,
+                    iconColor: Theme.of(context).colorScheme.onSurface,
                     value: '${coveredDistanceKm.toStringAsFixed(1)} ',
                     unit: 'km',
-                    valueColor: Colors.white,
+                    valueColor: Theme.of(context).colorScheme.onSurface,
                     subtitle: isWalking ? 'Walked so far' : 'Driven so far',
                   ),
 
                   // 2. Remaining Distance
                   _buildStatCard(
+                    context: context,
                     title: 'REMAINING',
                     icon: LucideIcons.flag,
-                    iconColor: Colors.white,
+                    iconColor: Theme.of(context).colorScheme.onSurface,
                     value: destination != null ? '${remainingDistanceKm.toStringAsFixed(1)} ' : '-- ',
                     unit: 'km',
-                    valueColor: Colors.white,
+                    valueColor: Theme.of(context).colorScheme.onSurface,
                     subtitle: destination != null ? 'To ${destination!.name.isNotEmpty ? destination!.name : destination!.city}' : 'No target',
                   ),
 
                   // 3. Estimated Time of Arrival (ETA)
                   _buildStatCard(
+                    context: context,
                     title: 'ETA TIME',
                     icon: LucideIcons.clock,
-                    iconColor: Colors.white,
+                    iconColor: Theme.of(context).colorScheme.onSurface,
                     value: destination != null ? (etaH > 0 ? '${etaH}h ${etaM}m' : '${etaM}m') : '--',
                     unit: '',
-                    valueColor: Colors.white,
+                    valueColor: Theme.of(context).colorScheme.onSurface,
                     subtitle: isWalking ? 'Walking duration' : 'Traffic ETA duration',
                   ),
 
                   // 4. Intermediate Stops Summary
                   _buildStatCard(
+                    context: context,
                     title: 'INTERMEDIATE STOPS',
                     icon: LucideIcons.coffee,
-                    iconColor: Colors.white,
+                    iconColor: Theme.of(context).colorScheme.onSurface,
                     value: '${pitStops.length} ',
                     unit: 'stops',
-                    valueColor: Colors.white,
+                    valueColor: Theme.of(context).colorScheme.onSurface,
                     subtitle: stopMinutes > 0 ? '${stopMinutes}m spent paused' : 'No pauses',
                   ),
                 ],
@@ -169,6 +173,7 @@ class LiveNavigationPanel extends StatelessWidget {
   }
 
   Widget _buildStatCard({
+    required BuildContext context,
     required String title,
     required IconData icon,
     required Color iconColor,
@@ -180,8 +185,8 @@ class LiveNavigationPanel extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.black,
-        border: Border.all(color: const Color(0xFF333333)),
+        color: Theme.of(context).scaffoldBackgroundColor,
+        border: Border.all(color: Theme.of(context).dividerColor),
         borderRadius: BorderRadius.circular(4),
       ),
       child: Column(
@@ -193,7 +198,7 @@ class LiveNavigationPanel extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: const TextStyle(fontSize: 10, color: Colors.grey),
+                style: TextStyle(fontSize: 10, color: Colors.grey),
               ),
               Icon(icon, color: iconColor, size: 14),
             ],
@@ -205,14 +210,14 @@ class LiveNavigationPanel extends StatelessWidget {
                 TextSpan(text: value),
                 TextSpan(
                   text: unit,
-                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.normal, color: Colors.grey),
+                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal, color: Colors.grey),
                 ),
               ],
             ),
           ),
           Text(
             subtitle,
-            style: const TextStyle(fontSize: 9, color: Colors.grey),
+            style: TextStyle(fontSize: 9, color: Colors.grey),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -221,3 +226,4 @@ class LiveNavigationPanel extends StatelessWidget {
     );
   }
 }
+

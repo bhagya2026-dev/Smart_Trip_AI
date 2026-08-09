@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import '../../domain/models/telemetry.dart';
@@ -6,6 +6,8 @@ import '../../providers/trip_provider.dart';
 import '../components/header_hud.dart';
 import '../components/start_trip_hero_card.dart';
 import '../components/live_navigation_panel.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 import '../components/speedometer_gforce_hud.dart';
 import '../components/radial_score_gauge.dart';
 
@@ -51,7 +53,7 @@ class DashboardView extends StatelessWidget {
 
     return SingleChildScrollView(
       child: Container(
-        color: Colors.black,
+        color: Theme.of(context).scaffoldBackgroundColor,
         padding: const EdgeInsets.only(bottom: 100),
         child: Column(
           children: [
@@ -68,9 +70,9 @@ class DashboardView extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: Colors.black,
+                      color: Theme.of(context).scaffoldBackgroundColor,
                       borderRadius: BorderRadius.circular(4),
-                      border: Border.all(color: const Color(0xFF333333)),
+                      border: Border.all(color: Theme.of(context).dividerColor),
                     ),
                     child: const Row(
                       children: [
@@ -115,20 +117,38 @@ class DashboardView extends StatelessWidget {
                   RadialScoreGauge(score: score),
                   const SizedBox(height: 16),
 
-                  // 7. Map Placeholder
+                  // 7. Interactive Route Map
                   Container(
                     height: 250,
                     decoration: BoxDecoration(
-                      color: Colors.black,
+                      color: Theme.of(context).scaffoldBackgroundColor,
                       borderRadius: BorderRadius.circular(4),
-                      border: Border.all(color: const Color(0xFF333333)),
-                      image: const DecorationImage(
-                        image: NetworkImage('https://maps.googleapis.com/maps/api/staticmap?center=6.9271,79.8612&zoom=12&size=600x300&maptype=roadmap&key=DUMMY'),
-                        fit: BoxFit.cover,
-                      ),
+                      border: Border.all(color: Theme.of(context).dividerColor),
                     ),
-                    child: const Center(
-                      child: Text('Interactive Route Map (Flutter Map)', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, backgroundColor: Colors.black54)),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(4),
+                      child: FlutterMap(
+                        options: MapOptions(
+                          initialCenter: LatLng(currentPoint.latitude, currentPoint.longitude),
+                          initialZoom: 14.0,
+                        ),
+                        children: [
+                          TileLayer(
+                            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                            userAgentPackageName: 'com.example.smart_trip_ai_mobile',
+                          ),
+                          MarkerLayer(
+                            markers: [
+                              Marker(
+                                point: LatLng(currentPoint.latitude, currentPoint.longitude),
+                                width: 40,
+                                height: 40,
+                                child: Icon(LucideIcons.navigation, color: Colors.blue, size: 30),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -140,3 +160,4 @@ class DashboardView extends StatelessWidget {
     );
   }
 }
+

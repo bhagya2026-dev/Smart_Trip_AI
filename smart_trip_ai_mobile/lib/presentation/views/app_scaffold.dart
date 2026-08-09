@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'home_view.dart';
 import 'dashboard_view.dart';
@@ -28,7 +28,7 @@ class _AppScaffoldState extends State<AppScaffold> {
     return Stack(
       children: [
         Scaffold(
-          backgroundColor: Colors.black,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           body: IndexedStack(
             index: _currentIndex,
             children: [
@@ -51,9 +51,9 @@ class _AppScaffoldState extends State<AppScaffold> {
             ],
           ),
           bottomNavigationBar: Container(
-            decoration: const BoxDecoration(
-              color: Colors.black,
-              border: Border(top: BorderSide(color: Color(0xFF333333))),
+            decoration: BoxDecoration(
+              color: Theme.of(context).scaffoldBackgroundColor,
+              border: Border(top: BorderSide(color: Theme.of(context).dividerColor)),
             ),
             child: SafeArea(
               child: BottomNavigationBar(
@@ -62,13 +62,13 @@ class _AppScaffoldState extends State<AppScaffold> {
                 backgroundColor: Colors.transparent,
                 type: BottomNavigationBarType.fixed,
                 elevation: 0,
-                selectedItemColor: Colors.white,
+                selectedItemColor: Theme.of(context).colorScheme.onSurface,
                 unselectedItemColor: Colors.grey,
-                selectedLabelStyle: const TextStyle(
+                selectedLabelStyle: TextStyle(
                   fontSize: 9,
                   fontWeight: FontWeight.bold,
                 ),
-                unselectedLabelStyle: const TextStyle(
+                unselectedLabelStyle: TextStyle(
                   fontSize: 9,
                 ),
                 items: const [
@@ -102,3 +102,4 @@ class _AppScaffoldState extends State<AppScaffold> {
     );
   }
 }
+

@@ -20,544 +20,308 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
-  String userName = 'Sri Lanka Driver';
-  String userTitle = 'Eco-Driver';
-  bool isEditing = false;
-  
-  late TextEditingController _nameController;
-  late TextEditingController _titleController;
-  late TextEditingController _vehicleNameController;
-  late TextEditingController _fuelPriceController;
-
-  @override
-  void initState() {
-    super.initState();
-    _nameController = TextEditingController(text: userName);
-    _titleController = TextEditingController(text: userTitle);
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final tripProvider = context.read<TripProvider>();
-    _vehicleNameController = TextEditingController(text: tripProvider.vehicleConfig.vehicleName);
-    _fuelPriceController = TextEditingController(text: tripProvider.vehicleConfig.fuelPricePerLiter.toString());
-  }
-
-  @override
-  void dispose() {
-    _nameController.dispose();
-    _titleController.dispose();
-    _vehicleNameController.dispose();
-    _fuelPriceController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     final tripProvider = context.watch<TripProvider>();
-    final ecoScoreVal = 90;
-    final overallRatingVal = ((widget.avgSafetyScore + ecoScoreVal) / 2).round();
+    final theme = Theme.of(context);
+    final onSurface = theme.colorScheme.onSurface;
+    final bg = theme.scaffoldBackgroundColor;
 
-    return SingleChildScrollView(
-      child: Container(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 100),
-        color: Colors.black,
-        child: Column(
-          children: [
-            // 1. Driver Profile Hero Header Card
-            _buildProfileHeader(tripProvider),
-            const SizedBox(height: 24),
-
-            // 2. Existing Driving Score Overview Gauges
-            _buildScoreGauges(ecoScoreVal, overallRatingVal),
-            const SizedBox(height: 24),
-
-            // 3. Driver Badges & Telemetry Stats
-            _buildTelemetryStats(),
-            const SizedBox(height: 24),
-
-            // 4. Driver Achievements Badges
-            _buildAchievements(),
-            const SizedBox(height: 24),
-
-            // 5. Active Vehicle Profile Configuration
-            _buildVehicleConfig(tripProvider),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        backgroundColor: bg,
+        appBar: AppBar(
+          backgroundColor: bg,
+          elevation: 0,
+          title: Text(
+            'ecodriver_sl',
+            style: TextStyle(color: onSurface, fontWeight: FontWeight.bold, fontSize: 18),
+          ),
+          actions: [
+            IconButton(icon: Icon(LucideIcons.plusSquare, color: onSurface), onPressed: () {}),
+            IconButton(icon: Icon(LucideIcons.menu, color: onSurface), onPressed: () {}),
           ],
+        ),
+        body: NestedScrollView(
+          headerSliverBuilder: (context, _) {
+            return [
+              SliverToBoxAdapter(
+                child: _buildProfileHeader(theme, tripProvider),
+              ),
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: _SliverAppBarDelegate(
+                  TabBar(
+                    indicatorColor: onSurface,
+                    labelColor: onSurface,
+                    unselectedLabelColor: Colors.grey,
+                    tabs: const [
+                      Tab(icon: Icon(LucideIcons.grid)),
+                      Tab(icon: Icon(LucideIcons.video)), // Mock reels/videos tab
+                    ],
+                  ),
+                  bg,
+                ),
+              ),
+            ];
+          },
+          body: TabBarView(
+            children: [
+              _buildTripGrid(theme),
+              const Center(child: Text('No videos yet', style: TextStyle(color: Colors.grey))),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildProfileHeader(TripProvider tripProvider) {
-    return Container(
-      padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        color: Colors.black,
-        borderRadius: BorderRadius.circular(4),
-        border: Border.all(color: const Color(0xFF333333)),
-      ),
-      child: Stack(
-        children: [
-          // Background Gradient Blur
-          Positioned(
-            top: -50,
-            right: -50,
-            child: Container(
-              width: 150,
-              height: 150,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: RadialGradient(
-                  colors: [
-                    const Color(0xFF00E676).withOpacity(0.15),
-                    Colors.transparent,
-                  ],
-                ),
-              ),
-            ),
-          ),
-          
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Avatar
-              Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  Container(
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(4),
-                      border: Border.all(color: const Color(0xFF333333), width: 1),
-                    ),
-                    child: const Center(
-                      child: Icon(LucideIcons.user, size: 40, color: Colors.white),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: -4,
-                    right: -4,
-                    child: Container(
-                      padding: const EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF00E676),
-                        shape: BoxShape.circle,
-                        border: Border.all(color: const Color(0xFF0B1117), width: 2),
-                      ),
-                      child: const Icon(LucideIcons.sparkles, size: 12, color: Color(0xFF0B1117)),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(width: 16),
-              
-              // Info
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Row(
-                            children: [
-                              if (isEditing)
-                                Expanded(
-                                  child: TextField(
-                                    controller: _nameController,
-                                    style: const TextStyle(color: Color(0xFFE6F1FF), fontSize: 18, fontWeight: FontWeight.bold),
-                                    decoration: const InputDecoration(
-                                      isDense: true,
-                                      contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                    ),
-                                    onChanged: (val) => userName = val,
-                                  ),
-                                )
-                              else
-                                Text(
-                                  userName,
-                                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: Color(0xFFE6F1FF)),
-                                ),
-                              IconButton(
-                                icon: const Icon(LucideIcons.edit3, size: 16, color: Color(0xFF9FB3C8)),
-                                onPressed: () {
-                                  setState(() {
-                                    isEditing = !isEditing;
-                                  });
-                                },
-                                padding: EdgeInsets.zero,
-                                constraints: const BoxConstraints(),
-                                iconSize: 16,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                          decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(4),
-                            border: Border.all(color: const Color(0xFF333333)),
-                          ),
-                          child: Row(
-                            children: [
-                              Container(
-                                width: 6,
-                                height: 6,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              const SizedBox(width: 4),
-                              const Text(
-                                'LIVE GPS VERIFIED',
-                                style: TextStyle(
-                                  fontSize: 8,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    if (isEditing)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 4.0),
-                        child: TextField(
-                          controller: _titleController,
-                          style: const TextStyle(color: Colors.grey, fontSize: 12),
-                          decoration: const InputDecoration(
-                            isDense: true,
-                            contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                          ),
-                          onChanged: (val) => userTitle = val,
-                        ),
-                      )
-                    else
-                      Text(
-                        userTitle,
-                        style: const TextStyle(color: Colors.grey, fontSize: 12),
-                      ),
-                    
-                    const SizedBox(height: 12),
-                    Wrap(
-                      spacing: 8,
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      children: [
-                        const Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(LucideIcons.mapPin, size: 12, color: Color(0xFF00E676)),
-                            SizedBox(width: 4),
-                            Text('Sri Lanka Real-Time Location', style: TextStyle(color: Color(0xFF9FB3C8), fontSize: 10, fontFamily: 'monospace')),
-                          ],
-                        ),
-                        const Text('•', style: TextStyle(color: Color(0xFF9FB3C8))),
-                        Text(
-                          tripProvider.vehicleConfig.vehicleName,
-                          style: const TextStyle(color: Color(0xFF00E676), fontSize: 10, fontWeight: FontWeight.bold, fontFamily: 'monospace'),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
+  Widget _buildProfileHeader(ThemeData theme, TripProvider tripProvider) {
+    final onSurface = theme.colorScheme.onSurface;
 
-  Widget _buildScoreGauges(int ecoScoreVal, int overallRatingVal) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.black,
-        borderRadius: BorderRadius.circular(4),
-        border: Border.all(color: const Color(0xFF333333)),
-      ),
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Icon(LucideIcons.shieldCheck, size: 16, color: Colors.white),
-              SizedBox(width: 8),
-              Text(
-                'DRIVER SAFETY & TELEMATICS RATING',
-                style: TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+              // Avatar
+              Container(
+                width: 80,
+                height: 80,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: theme.dividerColor, width: 1.5),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: theme.dividerColor,
+                    ),
+                    child: Icon(LucideIcons.user, size: 40, color: onSurface),
+                  ),
                 ),
               ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          GridView.count(
-            crossAxisCount: 3,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            crossAxisSpacing: 12,
-            childAspectRatio: 0.75,
-            children: [
-              _buildGaugeItem('SAFETY SCORE', widget.avgSafetyScore, Colors.white, 'EXCELLENT RATING'),
-              _buildGaugeItem('ECO EFFICIENCY', ecoScoreVal, Colors.white, 'HIGH EFFICIENCY'),
-              _buildGaugeItem('OVERALL DRIVER RATING', overallRatingVal, Colors.white, 'VERIFIED DRIVER'),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildGaugeItem(String title, int score, Color color, String badge) {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.black,
-        borderRadius: BorderRadius.circular(4),
-        border: Border.all(color: const Color(0xFF333333)),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(title, style: const TextStyle(fontSize: 8, fontWeight: FontWeight.bold, color: Colors.grey), textAlign: TextAlign.center),
-          const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(
-                score.toString(),
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: color),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(bottom: 4, left: 4),
-                child: Text('/ 100', style: TextStyle(fontSize: 8, color: Colors.grey)),
+              // Stats
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    _buildStatColumn('Trips', widget.totalTripsCount > 0 ? widget.totalTripsCount.toString() : '24', onSurface),
+                    _buildStatColumn('Dist (km)', widget.totalDistanceKm > 0 ? widget.totalDistanceKm.toStringAsFixed(1) : '842', onSurface),
+                    _buildStatColumn('EcoScore', widget.avgSafetyScore > 0 ? widget.avgSafetyScore.toString() : '92', onSurface),
+                  ],
+                ),
               ),
             ],
           ),
           const SizedBox(height: 12),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.circular(4),
-              border: Border.all(color: const Color(0xFF333333)),
-            ),
-            child: Text(
-              badge,
-              style: TextStyle(fontSize: 7, fontWeight: FontWeight.bold, color: color),
-              textAlign: TextAlign.center,
-            ),
+          Text(
+            'Sri Lanka Driver',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: onSurface),
           ),
+          const SizedBox(height: 4),
+          Text(
+            'Eco-Driver â€¢ Hybrid Vehicle enthusiast\nColombo ðŸ“',
+            style: TextStyle(fontSize: 14, color: onSurface),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            tripProvider.vehicleConfig.vehicleName,
+            style: TextStyle(fontSize: 14, color: Colors.blue, fontWeight: FontWeight.w500),
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              Expanded(
+                child: OutlinedButton(
+                  onPressed: () {},
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: onSurface,
+                    side: BorderSide(color: theme.dividerColor),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+                  ),
+                  child: const Text('Edit Profile', style: TextStyle(fontWeight: FontWeight.bold)),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: OutlinedButton(
+                  onPressed: () {},
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: onSurface,
+                    side: BorderSide(color: theme.dividerColor),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+                  ),
+                  child: const Text('Share Profile', style: TextStyle(fontWeight: FontWeight.bold)),
+                ),
+              ),
+              const SizedBox(width: 8),
+              OutlinedButton(
+                onPressed: () {},
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: onSurface,
+                  side: BorderSide(color: theme.dividerColor),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+                ),
+                child: Icon(LucideIcons.userPlus, size: 18),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
         ],
       ),
     );
   }
 
-  Widget _buildTelemetryStats() {
-    return GridView.count(
-      crossAxisCount: 2,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      crossAxisSpacing: 12,
-      mainAxisSpacing: 12,
-      childAspectRatio: 1.5,
+  Widget _buildStatColumn(String label, String value, Color color) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        _buildStatCard('TOTAL LOGGED TRIPS', '${widget.totalTripsCount} Drives', 'SQLite Persistence', Colors.white, LucideIcons.car),
-        _buildStatCard('TOTAL DISTANCE', '${widget.totalDistanceKm.toStringAsFixed(1)} km', 'Covered in Sri Lanka', Colors.white, LucideIcons.leaf),
-        _buildStatCard('SENSOR STREAM', 'REAL-TIME GPS', 'Hardware WatchPosition', Colors.white, LucideIcons.zap),
+        Text(
+          value,
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: color),
+        ),
+        Text(
+          label,
+          style: TextStyle(fontSize: 12, color: color),
+        ),
       ],
     );
   }
 
-  Widget _buildStatCard(String title, String value, String subtitle, Color color, IconData icon) {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.black,
-        borderRadius: BorderRadius.circular(4),
-        border: Border.all(color: const Color(0xFF333333), width: 1),
+  Widget _buildTripGrid(ThemeData theme) {
+    final mockTrips = 12; // Just to fill the grid
+
+    return GridView.builder(
+      padding: const EdgeInsets.only(bottom: 100), // Space for footer
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        crossAxisSpacing: 2,
+        mainAxisSpacing: 2,
       ),
-      child: Stack(
-        children: [
-          Column(
+      itemCount: mockTrips,
+      itemBuilder: (context, index) {
+        return GestureDetector(
+          onTap: () => _showTripDetailsDialog(index),
+          child: Container(
+          color: theme.dividerColor.withValues(alpha: 0.5),
+          padding: const EdgeInsets.all(8),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(title, style: const TextStyle(fontSize: 8, color: Colors.grey)),
-              const SizedBox(height: 4),
-              Text(value, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: color)),
-              const SizedBox(height: 4),
-              Text(subtitle, style: TextStyle(fontSize: 8, color: Colors.grey)),
-            ],
-          ),
-          Positioned(
-            right: 0,
-            bottom: 0,
-            child: Icon(icon, size: 32, color: color.withOpacity(0.2)),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildAchievements() {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.black,
-        borderRadius: BorderRadius.circular(4),
-        border: Border.all(color: const Color(0xFF333333)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Row(
-            children: [
-              Icon(LucideIcons.award, size: 16, color: Colors.white),
-              SizedBox(width: 8),
-              Text(
-                'DRIVER ACHIEVEMENTS & CERTIFICATIONS',
-                style: TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          _buildAchievementItem('Smooth Driver', 'Zero hard accel events', LucideIcons.shieldCheck, Colors.white),
-          const SizedBox(height: 12),
-          _buildAchievementItem('Eco Master', 'Efficient drive rating', LucideIcons.fuel, Colors.white),
-          const SizedBox(height: 12),
-          _buildAchievementItem('Sri Lanka Highways', 'Galle Road A2 Verified', LucideIcons.car, Colors.white),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildAchievementItem(String title, String subtitle, IconData icon, Color color) {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.black,
-        borderRadius: BorderRadius.circular(4),
-        border: Border.all(color: const Color(0xFF333333)),
-      ),
-      child: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.circular(4),
-              border: Border.all(color: const Color(0xFF333333)),
-            ),
-            child: Icon(icon, color: color, size: 20),
-          ),
-          const SizedBox(width: 12),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(title, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white)),
-              Text(subtitle, style: const TextStyle(fontSize: 10, color: Colors.grey)),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildVehicleConfig(TripProvider tripProvider) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.black,
-        borderRadius: BorderRadius.circular(4),
-        border: Border.all(color: const Color(0xFF333333)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(LucideIcons.car, size: 16, color: Colors.white),
-                  SizedBox(width: 8),
-                  Text(
-                    'REGISTERED VEHICLE SPECIFICATIONS',
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
+                  Icon(LucideIcons.mapPin, color: theme.colorScheme.onSurface, size: 12),
+                  Text('${15 + index} km', style: TextStyle(color: theme.colorScheme.onSurface, fontSize: 10, fontWeight: FontWeight.bold)),
                 ],
               ),
-              Text('ACTIVE', style: TextStyle(fontSize: 10, color: Colors.white)),
+              Center(
+                child: Icon(LucideIcons.navigation, color: Colors.blue.withValues(alpha: 0.8), size: 24),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Score: ${98 - index}', style: TextStyle(color: Colors.green, fontSize: 9, fontWeight: FontWeight.bold)),
+                  Text('Aug ${10 + index}', style: TextStyle(color: Colors.grey, fontSize: 9)),
+                ],
+              ),
             ],
           ),
-          const SizedBox(height: 16),
-          Column(
+        ));
+      },
+    );
+  }
+
+  void _showTripDetailsDialog(int index) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Vehicle Name:', style: TextStyle(fontSize: 10, color: Colors.grey)),
-              const SizedBox(height: 4),
-              TextField(
-                controller: _vehicleNameController,
-                style: const TextStyle(fontSize: 12, color: Colors.white),
-                decoration: const InputDecoration(
-                  filled: true,
-                  fillColor: Colors.black,
-                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF333333))),
-                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-                  isDense: true,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+              Text('Trip Details', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSurface)),
+              const SizedBox(height: 16),
+              _buildDetailRow(LucideIcons.calendar, 'Date', 'August ${10 + index}, 2026'),
+              _buildDetailRow(LucideIcons.clock, 'Time', '08:30 AM - 09:15 AM'),
+              _buildDetailRow(LucideIcons.hourglass, 'Duration', '45 mins'),
+              _buildDetailRow(LucideIcons.navigation, 'Distance', '${15 + index} km'),
+              _buildDetailRow(LucideIcons.gauge, 'Avg Speed', '42 km/h'),
+              _buildDetailRow(LucideIcons.mapPin, 'From', 'Colombo'),
+              _buildDetailRow(LucideIcons.flag, 'To', 'Galle'),
+              const SizedBox(height: 24),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                  ),
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('Close'),
                 ),
-                onSubmitted: (val) {
-                  final config = tripProvider.vehicleConfig;
-                  tripProvider.updateVehicleConfig(config.copyWith(vehicleName: val));
-                },
-              ),
-              const SizedBox(height: 12),
-              const Text('Fuel Price (LKR / Liter):', style: TextStyle(fontSize: 10, color: Colors.grey)),
-              const SizedBox(height: 4),
-              TextField(
-                controller: _fuelPriceController,
-                keyboardType: TextInputType.number,
-                style: const TextStyle(fontSize: 12, color: Colors.white),
-                decoration: const InputDecoration(
-                  filled: true,
-                  fillColor: Colors.black,
-                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF333333))),
-                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-                  isDense: true,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                ),
-                onSubmitted: (val) {
-                  final config = tripProvider.vehicleConfig;
-                  final price = double.tryParse(val) ?? config.fuelPricePerLiter;
-                  tripProvider.updateVehicleConfig(config.copyWith(fuelPricePerLiter: price));
-                },
               ),
             ],
           ),
+        );
+      },
+    );
+  }
+
+  Widget _buildDetailRow(IconData icon, String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        children: [
+          Icon(icon, size: 16, color: Colors.grey),
+          const SizedBox(width: 8),
+          Text(label, style: const TextStyle(color: Colors.grey, fontSize: 14)),
+          const Spacer(),
+          Text(value, style: TextStyle(color: Theme.of(context).colorScheme.onSurface, fontSize: 14, fontWeight: FontWeight.bold)),
         ],
       ),
     );
   }
 }
+
+class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
+  _SliverAppBarDelegate(this._tabBar, this._backgroundColor);
+
+  final TabBar _tabBar;
+  final Color _backgroundColor;
+
+  @override
+  double get minExtent => _tabBar.preferredSize.height;
+  @override
+  double get maxExtent => _tabBar.preferredSize.height;
+
+  @override
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Container(
+      color: _backgroundColor,
+      child: _tabBar,
+    );
+  }
+
+  @override
+  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
+    return false;
+  }
+}
+
+
