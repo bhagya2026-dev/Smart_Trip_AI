@@ -29,7 +29,7 @@ class HomeView extends StatelessWidget {
     return SingleChildScrollView(
       child: Container(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 100),
-        color: const Color(0xFF0B1117),
+        color: Colors.black,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -57,65 +57,18 @@ class HomeView extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: const Color(0xFF16212B),
-        border: Border.all(color: const Color(0xFF1F2A37)),
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.5),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          )
-        ],
+        color: Colors.black,
+        border: Border.all(color: const Color(0xFF333333)),
+        borderRadius: BorderRadius.circular(4),
       ),
       clipBehavior: Clip.antiAlias,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Hero Image Showcase
-          Stack(
-            children: [
-              Image.network(
-                'https://images.unsplash.com/photo-1549317661-bd32c8ce0be2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                height: 200,
-                width: double.infinity,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    height: 200,
-                    width: double.infinity,
-                    color: const Color(0xFF1F2A37),
-                    child: const Icon(LucideIcons.image, color: Color(0xFF9FB3C8)),
-                  );
-                },
-              ),
-              Positioned.fill(
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                      colors: [
-                        const Color(0xFF0B1117),
-                        const Color(0xFF0B1117).withOpacity(0.5),
-                        Colors.transparent,
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-
           // Hero Card Content
           Container(
             padding: const EdgeInsets.all(20),
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [Color(0xFF111A23), Color(0xFF0B1117)],
-              ),
-            ),
+            color: Colors.black,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -125,9 +78,9 @@ class HomeView extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF00E676).withOpacity(0.15),
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: const Color(0xFF00E676).withOpacity(0.4)),
+                        color: const Color(0xFF111111),
+                        borderRadius: BorderRadius.circular(4),
+                        border: Border.all(color: const Color(0xFF444444)),
                       ),
                       child: Row(
                         children: [
@@ -136,17 +89,16 @@ class HomeView extends StatelessWidget {
                             height: 8,
                             decoration: const BoxDecoration(
                               shape: BoxShape.circle,
-                              color: Color(0xFF00E676),
+                              color: Colors.white,
                             ),
                           ),
                           const SizedBox(width: 6),
                           const Text(
-                            'SMARTTRIP AI TELEMATICS',
+                            'SMARTTRIP TELEMATICS',
                             style: TextStyle(
-                              color: Color(0xFF00E676),
+                              color: Colors.white,
                               fontSize: 9,
                               fontWeight: FontWeight.bold,
-                              fontFamily: 'monospace',
                             ),
                           ),
                         ],
@@ -157,21 +109,20 @@ class HomeView extends StatelessWidget {
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF16212B),
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: const Color(0xFF00E676).withOpacity(0.4)),
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(4),
+                          border: Border.all(color: const Color(0xFF444444)),
                         ),
-                        child: Row(
+                        child: const Row(
                           children: [
-                            const Icon(LucideIcons.user, size: 14, color: Color(0xFFE6F1FF)),
-                            const SizedBox(width: 6),
-                            const Text(
+                            Icon(LucideIcons.user, size: 14, color: Colors.white),
+                            SizedBox(width: 6),
+                            Text(
                               'Kasun',
                               style: TextStyle(
-                                color: Color(0xFFE6F1FF),
+                                color: Colors.white,
                                 fontSize: 11,
                                 fontWeight: FontWeight.bold,
-                                fontFamily: 'monospace',
                               ),
                             ),
                           ],
@@ -181,22 +132,12 @@ class HomeView extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 16),
-                RichText(
-                  text: const TextSpan(
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w800,
-                      fontFamily: 'Inter',
-                      letterSpacing: -0.5,
-                      color: Color(0xFFE6F1FF),
-                    ),
-                    children: [
-                      TextSpan(text: 'DRIVE SMARTER ACROSS '),
-                      TextSpan(
-                        text: 'SRI LANKA',
-                        style: TextStyle(color: Color(0xFF00B8D4)), // Approx gradient text
-                      ),
-                    ],
+                const Text(
+                  'DRIVE SMARTER ACROSS SRI LANKA',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -204,7 +145,7 @@ class HomeView extends StatelessWidget {
                   'Transform live device sensors into real-time driving safety scores, fuel friction cost analytics, and automated pit-stop logging.',
                   style: TextStyle(
                     fontSize: 12,
-                    color: Color(0xFF9FB3C8),
+                    color: Colors.grey,
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -214,12 +155,12 @@ class HomeView extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: onStartTrip,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF00E676),
-                          foregroundColor: const Color(0xFF0B1117),
+                          backgroundColor: Colors.white,
+                          foregroundColor: Colors.black,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(4),
                           ),
-                          elevation: 8,
+                          elevation: 0,
                           padding: const EdgeInsets.symmetric(vertical: 12),
                         ),
                         child: const Row(
@@ -229,7 +170,7 @@ class HomeView extends StatelessWidget {
                             SizedBox(width: 8),
                             Text(
                               'START TRIP NOW',
-                              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w800, fontFamily: 'monospace'),
+                              style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),
@@ -240,10 +181,10 @@ class HomeView extends StatelessWidget {
                       child: OutlinedButton(
                         onPressed: () => onNavigateToTab(1), // LIVE_HUD
                         style: OutlinedButton.styleFrom(
-                          foregroundColor: const Color(0xFF00E676),
-                          side: const BorderSide(color: Color(0xFF00E676)),
+                          foregroundColor: Colors.white,
+                          side: const BorderSide(color: Colors.white),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(4),
                           ),
                           padding: const EdgeInsets.symmetric(vertical: 12),
                         ),
@@ -254,7 +195,7 @@ class HomeView extends StatelessWidget {
                             SizedBox(width: 8),
                             Text(
                               'OPEN LIVE HUD',
-                              style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, fontFamily: 'monospace'),
+                              style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),
@@ -282,40 +223,40 @@ class HomeView extends StatelessWidget {
         _buildStatCard(
           title: 'TOTAL TRIPS',
           icon: LucideIcons.calendar,
-          iconColor: const Color(0xFF00E676),
-          value: '\$trips',
-          valueColor: const Color(0xFFE6F1FF),
+          iconColor: Colors.white,
+          value: '$trips',
+          valueColor: Colors.white,
           subtitle: 'Recorded Drives',
           onTap: () => onNavigateToTab(2), // HISTORY
         ),
         _buildStatCard(
           title: 'DISTANCE',
           icon: LucideIcons.navigation,
-          iconColor: const Color(0xFF00B8D4),
-          value: '\${distance.toStringAsFixed(1)} km',
-          valueColor: const Color(0xFF00B8D4),
+          iconColor: Colors.white,
+          value: '${distance.toStringAsFixed(1)} km',
+          valueColor: Colors.white,
           subtitle: 'Covered so far',
-          subtitleColor: const Color(0xFF9FB3C8),
+          subtitleColor: Colors.grey,
           onTap: () => onNavigateToTab(1), // LIVE_HUD
         ),
         _buildStatCard(
           title: 'SAFETY RATING',
           icon: LucideIcons.shieldCheck,
-          iconColor: const Color(0xFF00E676),
-          value: '\$safety/100',
-          valueColor: const Color(0xFF00E676),
+          iconColor: Colors.white,
+          value: '$safety/100',
+          valueColor: Colors.white,
           subtitle: 'EXCELLENT',
-          subtitleColor: const Color(0xFF00E676),
+          subtitleColor: Colors.white,
           onTap: () => onNavigateToTab(1), // LIVE_HUD
         ),
         _buildStatCard(
           title: 'IDLE WASTED',
           icon: LucideIcons.flame,
-          iconColor: const Color(0xFFFF5252),
-          value: 'Rs. \${idleCost.toStringAsFixed(0)}',
-          valueColor: const Color(0xFFFF5252),
+          iconColor: Colors.white,
+          value: 'Rs. ${idleCost.toStringAsFixed(0)}',
+          valueColor: Colors.white,
           subtitle: 'Traffic Fuel Friction',
-          subtitleColor: const Color(0xFF9FB3C8),
+          subtitleColor: Colors.grey,
           onTap: () => onNavigateToTab(3), // FUEL
         ),
       ],
@@ -329,7 +270,7 @@ class HomeView extends StatelessWidget {
     required String value,
     required Color valueColor,
     required String subtitle,
-    Color subtitleColor = const Color(0xFF00E676),
+    Color subtitleColor = Colors.white,
     required VoidCallback onTap,
   }) {
     return GestureDetector(
@@ -337,9 +278,9 @@ class HomeView extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: const Color(0xFF16212B),
-          border: Border.all(color: const Color(0xFF1F2A37)),
-          borderRadius: BorderRadius.circular(12),
+          color: Colors.black,
+          border: Border.all(color: const Color(0xFF333333)),
+          borderRadius: BorderRadius.circular(4),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -350,7 +291,7 @@ class HomeView extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(fontSize: 10, color: Color(0xFF9FB3C8), fontFamily: 'monospace'),
+                  style: const TextStyle(fontSize: 10, color: Colors.grey),
                 ),
                 Icon(icon, color: iconColor, size: 14),
               ],
@@ -365,7 +306,7 @@ class HomeView extends StatelessWidget {
             ),
             Text(
               subtitle,
-              style: TextStyle(fontSize: 9, color: subtitleColor, fontWeight: FontWeight.bold, fontFamily: 'monospace'),
+              style: TextStyle(fontSize: 9, color: subtitleColor, fontWeight: FontWeight.bold),
             ),
           ],
         ),
@@ -382,15 +323,14 @@ class HomeView extends StatelessWidget {
           children: [
             const Row(
               children: [
-                Icon(LucideIcons.compass, color: Color(0xFF00E676), size: 16),
+                Icon(LucideIcons.compass, color: Colors.white, size: 16),
                 SizedBox(width: 8),
                 Text(
                   'FEATURED SRI LANKA DESTINATIONS',
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
-                    fontFamily: 'monospace',
-                    color: Color(0xFFE6F1FF),
+                    color: Colors.white,
                   ),
                 ),
               ],
@@ -399,8 +339,7 @@ class HomeView extends StatelessWidget {
               'Tap to Navigate',
               style: TextStyle(
                 fontSize: 10,
-                fontFamily: 'monospace',
-                color: Color(0xFF00B8D4),
+                color: Colors.grey,
               ),
             ),
           ],
@@ -426,9 +365,9 @@ class HomeView extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF16212B),
-                  border: Border.all(color: const Color(0xFF1F2A37)),
-                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.black,
+                  border: Border.all(color: const Color(0xFF333333)),
+                  borderRadius: BorderRadius.circular(4),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -440,18 +379,18 @@ class HomeView extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(6),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF00E676).withOpacity(0.15),
-                            borderRadius: BorderRadius.circular(8),
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(4),
+                            border: Border.all(color: const Color(0xFF333333)),
                           ),
-                          child: const Icon(LucideIcons.mapPin, color: Color(0xFF00E676), size: 14),
+                          child: const Icon(LucideIcons.mapPin, color: Colors.white, size: 14),
                         ),
                         Text(
-                          '~\${dest.distanceKmEst} km',
+                          '~${dest.distanceKmEst} km',
                           style: const TextStyle(
                             fontSize: 10,
-                            fontFamily: 'monospace',
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFF00E676),
+                            color: Colors.white,
                           ),
                         ),
                       ],
@@ -464,17 +403,16 @@ class HomeView extends StatelessWidget {
                           style: const TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFFE6F1FF),
+                            color: Colors.white,
                           ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
-                          '\${dest.city}, Sri Lanka',
+                          '${dest.city}, Sri Lanka',
                           style: const TextStyle(
                             fontSize: 10,
-                            fontFamily: 'monospace',
-                            color: Color(0xFF9FB3C8),
+                            color: Colors.grey,
                           ),
                         ),
                       ],
@@ -486,12 +424,11 @@ class HomeView extends StatelessWidget {
                           'START ROUTE',
                           style: TextStyle(
                             fontSize: 10,
-                            fontFamily: 'monospace',
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFF00B8D4),
+                            color: Colors.white,
                           ),
                         ),
-                        Icon(LucideIcons.arrowRight, color: Color(0xFF00B8D4), size: 12),
+                        Icon(LucideIcons.arrowRight, color: Colors.white, size: 12),
                       ],
                     ),
                   ],
@@ -508,31 +445,23 @@ class HomeView extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFF16212B), Color(0xFF111A23)],
-        ),
-        border: const Border(
-          left: BorderSide(color: Color(0xFF00E676), width: 4),
-          top: BorderSide(color: Color(0xFF1F2A37)),
-          bottom: BorderSide(color: Color(0xFF1F2A37)),
-          right: BorderSide(color: Color(0xFF1F2A37)),
-        ),
-        borderRadius: BorderRadius.circular(12),
+        color: Colors.black,
+        border: Border.all(color: const Color(0xFF333333), width: 1),
+        borderRadius: BorderRadius.circular(4),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Row(
             children: [
-              Icon(LucideIcons.sparkles, color: Color(0xFF00E676), size: 16),
+              Icon(LucideIcons.sparkles, color: Colors.white, size: 16),
               SizedBox(width: 8),
               Text(
                 'ON-DEVICE CONVERSATIONAL AI ASSISTANT',
                 style: TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.bold,
-                  fontFamily: 'monospace',
-                  color: Color(0xFF00E676),
+                  color: Colors.white,
                 ),
               ),
             ],
@@ -543,7 +472,7 @@ class HomeView extends StatelessWidget {
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
-              color: Color(0xFFE6F1FF),
+              color: Colors.white,
             ),
           ),
           const SizedBox(height: 6),
@@ -551,24 +480,24 @@ class HomeView extends StatelessWidget {
             'Try asking: "How much money did I waste in traffic this week?" or "What was my highest eco score?"',
             style: TextStyle(
               fontSize: 12,
-              color: Color(0xFF9FB3C8),
+              color: Colors.grey,
             ),
           ),
           const SizedBox(height: 16),
           OutlinedButton(
             onPressed: () => onNavigateToTab(1),
             style: OutlinedButton.styleFrom(
-              foregroundColor: const Color(0xFF00E676),
-              side: const BorderSide(color: Color(0xFF00E676)),
+              foregroundColor: Colors.white,
+              side: const BorderSide(color: Colors.white),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(4),
               ),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             ),
             child: const Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('TRY AI CHAT', style: TextStyle(fontSize: 10, fontFamily: 'monospace', fontWeight: FontWeight.bold)),
+                Text('TRY AI CHAT', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
                 SizedBox(width: 4),
                 Icon(LucideIcons.arrowRight, size: 12),
               ],
