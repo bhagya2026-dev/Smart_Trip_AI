@@ -19,7 +19,7 @@ class FuelAnalyticsView extends StatelessWidget {
     return SingleChildScrollView(
       child: Container(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 100),
-        color: const Color(0xFF0B1117),
+        color: Colors.black,
         child: Column(
           children: [
             // Header Bar
@@ -46,9 +46,9 @@ class FuelAnalyticsView extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFF16212B),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFF1F2A37)),
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(4),
+        border: Border.all(color: const Color(0xFF333333)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -59,7 +59,7 @@ class FuelAnalyticsView extends StatelessWidget {
               children: [
                 const Row(
                   children: [
-                    Icon(LucideIcons.flame, size: 20, color: Color(0xFFFF5252)),
+                    Icon(LucideIcons.flame, size: 20, color: Colors.white),
                     SizedBox(width: 8),
                     Expanded(
                       child: Text(
@@ -67,8 +67,7 @@ class FuelAnalyticsView extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
-                          fontFamily: 'monospace',
-                          color: Color(0xFFE6F1FF),
+                          color: Colors.white,
                         ),
                       ),
                     ),
@@ -77,11 +76,11 @@ class FuelAnalyticsView extends StatelessWidget {
                 const SizedBox(height: 4),
                 RichText(
                   text: TextSpan(
-                    style: const TextStyle(fontSize: 10, fontFamily: 'monospace', color: Color(0xFF9FB3C8)),
+                    style: const TextStyle(fontSize: 10, color: Colors.grey),
                     children: [
                       const TextSpan(text: 'Active Vehicle Profile: '),
-                      TextSpan(text: vehicleConfig.vehicleName, style: const TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF00E676))),
-                      TextSpan(text: ' (\${vehicleConfig.engineSizeLiters.toStringAsFixed(1)}L Engine)'),
+                      TextSpan(text: vehicleConfig.vehicleName, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+                      TextSpan(text: ' (${vehicleConfig.engineSizeLiters.toStringAsFixed(1)}L Engine)'),
                     ],
                   ),
                 ),
@@ -91,23 +90,16 @@ class FuelAnalyticsView extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
-              color: const Color(0xFFFF5252).withOpacity(0.15),
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: const Color(0xFFFF5252).withOpacity(0.4)),
-              boxShadow: [
-                BoxShadow(
-                  color: const Color(0xFFFF5252).withOpacity(0.2),
-                  blurRadius: 8,
-                )
-              ],
+              color: Colors.black,
+              borderRadius: BorderRadius.circular(4),
+              border: Border.all(color: const Color(0xFF333333)),
             ),
             child: Text(
-              'CONGESTION LOSS: Rs. \${totalIdleCost.toStringAsFixed(2)}',
+              'CONGESTION LOSS: Rs. ${totalIdleCost.toStringAsFixed(2)}',
               style: const TextStyle(
                 fontSize: 10,
                 fontWeight: FontWeight.bold,
-                fontFamily: 'monospace',
-                color: Color(0xFFFF5252),
+                color: Colors.white,
               ),
             ),
           ),
@@ -121,28 +113,29 @@ class FuelAnalyticsView extends StatelessWidget {
       children: [
         _buildMetricCard(
           'MONEY WASTED IDLING',
-          'Rs. \${totalIdleCost.toStringAsFixed(2)}',
+          'Rs. ${totalIdleCost.toStringAsFixed(2)}',
           'Direct cash burned while vehicle remained stationary in traffic.',
-          const Color(0xFFFFC107),
-          const Color(0xFF16212B),
+          Colors.white,
+          Colors.black,
+          borderColor: const Color(0xFF333333),
         ),
         const SizedBox(height: 12),
         _buildMetricCard(
           'FUEL BURNED IN TRAFFIC',
-          '\${totalIdleLiters.toStringAsFixed(2)} L',
+          '${totalIdleLiters.toStringAsFixed(2)} L',
           'Unproductively burned fuel in Sri Lankan traffic jams.',
-          const Color(0xFFFF5252),
-          const Color(0xFF16212B),
-          borderColor: const Color(0xFFFF5252),
+          Colors.white,
+          Colors.black,
+          borderColor: const Color(0xFF333333),
         ),
         const SizedBox(height: 12),
         _buildMetricCard(
           'PROJECTED ANNUAL TRAFFIC WASTE',
-          'Rs. \${annualLossEst.toStringAsFixed(2)}',
+          'Rs. ${annualLossEst.toStringAsFixed(2)}',
           'Estimated yearly congestion friction based on weekly patterns.',
-          const Color(0xFF00E676),
-          const Color(0xFF16212B),
-          borderColor: const Color(0xFF00E676),
+          Colors.white,
+          Colors.black,
+          borderColor: const Color(0xFF333333),
         ),
       ],
     );
@@ -154,22 +147,17 @@ class FuelAnalyticsView extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: bgColor,
-        borderRadius: BorderRadius.circular(12),
-        border: Border(
-          left: BorderSide(color: borderColor ?? const Color(0xFF1F2A37), width: 4),
-          top: const BorderSide(color: Color(0xFF1F2A37)),
-          right: const BorderSide(color: Color(0xFF1F2A37)),
-          bottom: const BorderSide(color: Color(0xFF1F2A37)),
-        ),
+        borderRadius: BorderRadius.circular(4),
+        border: Border.all(color: borderColor ?? const Color(0xFF333333), width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: const TextStyle(fontSize: 10, fontFamily: 'monospace', color: Color(0xFF9FB3C8))),
+          Text(title, style: const TextStyle(fontSize: 10, color: Colors.grey)),
           const SizedBox(height: 8),
-          Text(value, style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800, fontFamily: 'monospace', color: valueColor)),
+          Text(value, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: valueColor)),
           const SizedBox(height: 8),
-          Text(description, style: const TextStyle(fontSize: 10, color: Color(0xFF9FB3C8))),
+          Text(description, style: const TextStyle(fontSize: 10, color: Colors.grey)),
         ],
       ),
     );
@@ -179,21 +167,21 @@ class FuelAnalyticsView extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: const Color(0xFF16212B),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFF1F2A37)),
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(4),
+        border: Border.all(color: const Color(0xFF333333)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
             'ADJUST SRI LANKA FUEL & ENGINE PARAMETERS',
-            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, fontFamily: 'monospace', color: Color(0xFFE6F1FF)),
+            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white),
           ),
           const SizedBox(height: 20),
           _buildSlider(
             'Fuel Price:',
-            'Rs. \${tripProvider.vehicleConfig.fuelPricePerLiter.toStringAsFixed(0)} / L',
+            'Rs. ${tripProvider.vehicleConfig.fuelPricePerLiter.toStringAsFixed(0)} / L',
             250.0,
             600.0,
             tripProvider.vehicleConfig.fuelPricePerLiter,
@@ -202,7 +190,7 @@ class FuelAnalyticsView extends StatelessWidget {
           const SizedBox(height: 16),
           _buildSlider(
             'Idle Burn:',
-            '\${tripProvider.vehicleConfig.idleConsumptionRateLph.toStringAsFixed(1)} L / Hour',
+            '${tripProvider.vehicleConfig.idleConsumptionRateLph.toStringAsFixed(1)} L / Hour',
             0.5,
             3.5,
             tripProvider.vehicleConfig.idleConsumptionRateLph,
@@ -211,7 +199,7 @@ class FuelAnalyticsView extends StatelessWidget {
           const SizedBox(height: 16),
           _buildSlider(
             'Engine Size:',
-            '\${tripProvider.vehicleConfig.engineSizeLiters.toStringAsFixed(1)} L',
+            '${tripProvider.vehicleConfig.engineSizeLiters.toStringAsFixed(1)} L',
             1.0,
             5.0,
             tripProvider.vehicleConfig.engineSizeLiters,
@@ -228,16 +216,16 @@ class FuelAnalyticsView extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(label, style: const TextStyle(fontSize: 10, fontFamily: 'monospace', color: Color(0xFF9FB3C8))),
-            Text(valueText, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, fontFamily: 'monospace', color: Color(0xFF00E676))),
+            Text(label, style: const TextStyle(fontSize: 10, color: Colors.grey)),
+            Text(valueText, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white)),
           ],
         ),
         Slider(
           value: value,
           min: min,
           max: max,
-          activeColor: const Color(0xFF00E676),
-          inactiveColor: const Color(0xFF1F2A37),
+          activeColor: Colors.white,
+          inactiveColor: const Color(0xFF333333),
           onChanged: onChanged,
         ),
       ],
@@ -248,21 +236,16 @@ class FuelAnalyticsView extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: const Color(0xFF00E676).withOpacity(0.05),
-        borderRadius: BorderRadius.circular(12),
-        border: const Border(
-          left: BorderSide(color: Color(0xFF00E676), width: 4),
-          top: BorderSide(color: Color(0xFF1F2A37)),
-          right: BorderSide(color: Color(0xFF1F2A37)),
-          bottom: BorderSide(color: Color(0xFF1F2A37)),
-        ),
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(4),
+        border: Border.all(color: const Color(0xFF333333), width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Row(
             children: [
-              Icon(LucideIcons.leaf, size: 16, color: Color(0xFF00E676)),
+              Icon(LucideIcons.leaf, size: 16, color: Colors.white),
               SizedBox(width: 8),
               Expanded(
                 child: Text(
@@ -270,8 +253,7 @@ class FuelAnalyticsView extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
-                    fontFamily: 'monospace',
-                    color: Color(0xFF00E676),
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -292,11 +274,11 @@ class FuelAnalyticsView extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('✓ ', style: TextStyle(fontSize: 12, color: Color(0xFF00E676))),
+        const Text('✓ ', style: TextStyle(fontSize: 12, color: Colors.white)),
         Expanded(
           child: RichText(
             text: TextSpan(
-              style: const TextStyle(fontSize: 10, fontFamily: 'monospace', color: Color(0xFFE6F1FF)),
+              style: const TextStyle(fontSize: 10, color: Colors.white),
               children: [
                 TextSpan(text: boldPart, style: const TextStyle(fontWeight: FontWeight.bold)),
                 const TextSpan(text: ' '),
