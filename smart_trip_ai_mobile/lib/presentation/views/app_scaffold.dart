@@ -28,7 +28,7 @@ class _AppScaffoldState extends State<AppScaffold> {
     return Stack(
       children: [
         Scaffold(
-          backgroundColor: const Color(0xFF0B1117),
+          backgroundColor: Colors.black,
           body: IndexedStack(
             index: _currentIndex,
             children: [
@@ -52,8 +52,8 @@ class _AppScaffoldState extends State<AppScaffold> {
           ),
           bottomNavigationBar: Container(
             decoration: const BoxDecoration(
-              color: Color(0xFA0B1117),
-              border: Border(top: BorderSide(color: Color(0xFF1F2A37))),
+              color: Colors.black,
+              border: Border(top: BorderSide(color: Color(0xFF333333))),
             ),
             child: SafeArea(
               child: BottomNavigationBar(
@@ -62,16 +62,14 @@ class _AppScaffoldState extends State<AppScaffold> {
                 backgroundColor: Colors.transparent,
                 type: BottomNavigationBarType.fixed,
                 elevation: 0,
-                selectedItemColor: const Color(0xFF00E676),
-                unselectedItemColor: const Color(0xFF9FB3C8),
+                selectedItemColor: Colors.white,
+                unselectedItemColor: Colors.grey,
                 selectedLabelStyle: const TextStyle(
                   fontSize: 9,
                   fontWeight: FontWeight.bold,
-                  fontFamily: 'monospace',
                 ),
                 unselectedLabelStyle: const TextStyle(
                   fontSize: 9,
-                  fontFamily: 'monospace',
                 ),
                 items: const [
                   BottomNavigationBarItem(
