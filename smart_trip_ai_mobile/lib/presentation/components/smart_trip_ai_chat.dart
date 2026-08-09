@@ -59,18 +59,16 @@ class _SmartTripAIChatState extends State<SmartTripAIChat> {
 
   @override
   Widget build(BuildContext context) {
-    if (!_isOpen) {
       return Positioned(
         bottom: 24,
         right: 24,
         child: FloatingActionButton.extended(
           onPressed: () => setState(() => _isOpen = true),
-          backgroundColor: const Color(0xFF00B8D4),
-          icon: const Icon(LucideIcons.sparkles, size: 20, color: Colors.white),
-          label: const Text('SMART TRIP AI CHAT', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, fontFamily: 'monospace', color: Colors.white)),
+          backgroundColor: Colors.white,
+          icon: const Icon(LucideIcons.sparkles, size: 20, color: Colors.black),
+          label: const Text('SMART TRIP AI CHAT', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black)),
         ),
       );
-    }
 
     return Positioned(
       bottom: 24,
@@ -81,9 +79,9 @@ class _SmartTripAIChatState extends State<SmartTripAIChat> {
         color: Colors.transparent,
         child: Container(
           decoration: BoxDecoration(
-            color: const Color(0xFF0B1117).withOpacity(0.95),
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: const Color(0xFF00B8D4).withOpacity(0.5)),
+            color: Colors.black.withOpacity(0.95),
+            borderRadius: BorderRadius.circular(4),
+            border: Border.all(color: const Color(0xFF333333)),
             boxShadow: [
               BoxShadow(color: Colors.black.withOpacity(0.5), blurRadius: 20)
             ],
@@ -94,7 +92,7 @@ class _SmartTripAIChatState extends State<SmartTripAIChat> {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: const BoxDecoration(
-                  border: Border(bottom: BorderSide(color: Color(0xFF1F2A37))),
+                  border: Border(bottom: BorderSide(color: Color(0xFF333333))),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -104,23 +102,23 @@ class _SmartTripAIChatState extends State<SmartTripAIChat> {
                         Container(
                           padding: const EdgeInsets.all(6),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF00B8D4).withOpacity(0.2),
-                            borderRadius: BorderRadius.circular(8),
+                            color: const Color(0xFF333333),
+                            borderRadius: BorderRadius.circular(4),
                           ),
-                          child: const Icon(LucideIcons.bot, size: 16, color: Color(0xFF00B8D4)),
+                          child: const Icon(LucideIcons.bot, size: 16, color: Colors.white),
                         ),
                         const SizedBox(width: 8),
                         const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('SMART TRIP AI ASSISTANT', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, fontFamily: 'monospace', color: Colors.white)),
-                            Text('ON-DEVICE SQL QUERY ENGINE', style: TextStyle(fontSize: 8, fontFamily: 'monospace', color: Color(0xFF00E676))),
+                            Text('SMART TRIP AI ASSISTANT', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white)),
+                            Text('ON-DEVICE SQL QUERY ENGINE', style: TextStyle(fontSize: 8, color: Colors.grey)),
                           ],
                         ),
                       ],
                     ),
                     IconButton(
-                      icon: const Icon(LucideIcons.x, size: 16, color: Color(0xFF9FB3C8)),
+                      icon: const Icon(LucideIcons.x, size: 16, color: Colors.grey),
                       onPressed: () => setState(() => _isOpen = false),
                       constraints: const BoxConstraints(),
                       padding: EdgeInsets.zero,
@@ -144,9 +142,9 @@ class _SmartTripAIChatState extends State<SmartTripAIChat> {
                         padding: const EdgeInsets.all(12),
                         constraints: const BoxConstraints(maxWidth: 280),
                         decoration: BoxDecoration(
-                          color: isUser ? const Color(0xFF00B8D4).withOpacity(0.2) : const Color(0xFF16212B),
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: isUser ? const Color(0xFF00B8D4).withOpacity(0.4) : const Color(0xFF1F2A37)),
+                          color: isUser ? const Color(0xFF333333) : Colors.black,
+                          borderRadius: BorderRadius.circular(4),
+                          border: Border.all(color: const Color(0xFF333333)),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -154,32 +152,32 @@ class _SmartTripAIChatState extends State<SmartTripAIChat> {
                             Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Icon(isUser ? LucideIcons.user : LucideIcons.bot, size: 10, color: isUser ? const Color(0xFF00B8D4) : const Color(0xFF00E676)),
+                                Icon(isUser ? LucideIcons.user : LucideIcons.bot, size: 10, color: Colors.grey),
                                 const SizedBox(width: 4),
-                                Text(isUser ? 'YOU' : 'AI TELEMATICS ENGINE', style: const TextStyle(fontSize: 8, fontFamily: 'monospace', color: Color(0xFF9FB3C8))),
+                                Text(isUser ? 'YOU' : 'AI TELEMATICS ENGINE', style: const TextStyle(fontSize: 8, color: Colors.grey)),
                               ],
                             ),
                             const SizedBox(height: 8),
-                            Text(msg['text'], style: TextStyle(fontSize: 10, fontFamily: 'monospace', color: isUser ? Colors.white : const Color(0xFFE6F1FF))),
+                            Text(msg['text'], style: const TextStyle(fontSize: 10, color: Colors.white)),
                             if (msg['sql'] != null) ...[
                               const SizedBox(height: 8),
-                              const Divider(color: Color(0xFF1F2A37)),
+                              const Divider(color: Color(0xFF333333)),
                               Row(
                                 children: [
-                                  const Icon(LucideIcons.code2, size: 10, color: Color(0xFF00B8D4)),
+                                  const Icon(LucideIcons.code2, size: 10, color: Colors.grey),
                                   const SizedBox(width: 4),
-                                  const Text('VIEW GENERATED SQL', style: TextStyle(fontSize: 8, fontWeight: FontWeight.bold, fontFamily: 'monospace', color: Color(0xFF00B8D4))),
+                                  const Text('VIEW GENERATED SQL', style: TextStyle(fontSize: 8, fontWeight: FontWeight.bold, color: Colors.grey)),
                                 ],
                               ),
                               const SizedBox(height: 4),
                               Container(
                                 padding: const EdgeInsets.all(8),
                                 decoration: BoxDecoration(
-                                  color: const Color(0xFF0B1117),
+                                  color: Colors.black,
                                   borderRadius: BorderRadius.circular(4),
-                                  border: Border.all(color: const Color(0xFF1F2A37)),
+                                  border: Border.all(color: const Color(0xFF333333)),
                                 ),
-                                child: Text(msg['sql'], style: const TextStyle(fontSize: 8, fontFamily: 'monospace', color: Color(0xFFFFC107))),
+                                child: Text(msg['sql'], style: const TextStyle(fontSize: 8, color: Colors.white)),
                               ),
                             ]
                           ],
@@ -195,9 +193,9 @@ class _SmartTripAIChatState extends State<SmartTripAIChat> {
                   padding: const EdgeInsets.all(12),
                   child: Row(
                     children: [
-                      const Icon(LucideIcons.sparkles, size: 12, color: Color(0xFF00B8D4)),
+                      const Icon(LucideIcons.sparkles, size: 12, color: Colors.white),
                       const SizedBox(width: 8),
-                      const Text('Translating natural query into SQLite execution...', style: TextStyle(fontSize: 9, fontFamily: 'monospace', color: Color(0xFF9FB3C8))),
+                      const Text('Translating natural query into SQLite execution...', style: TextStyle(fontSize: 9, color: Colors.grey)),
                     ],
                   ),
                 ),
@@ -207,8 +205,8 @@ class _SmartTripAIChatState extends State<SmartTripAIChat> {
                 height: 40,
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 decoration: const BoxDecoration(
-                  color: Color(0xFF16212B),
-                  border: Border(top: BorderSide(color: Color(0xFF1F2A37))),
+                  color: Colors.black,
+                  border: Border(top: BorderSide(color: Color(0xFF333333))),
                 ),
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
@@ -221,11 +219,11 @@ class _SmartTripAIChatState extends State<SmartTripAIChat> {
                         child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF0B1117),
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: const Color(0xFF1F2A37)),
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(4),
+                            border: Border.all(color: const Color(0xFF333333)),
                           ),
-                          child: Text(_quickPrompts[index], style: const TextStyle(fontSize: 8, fontFamily: 'monospace', color: Color(0xFF9FB3C8))),
+                          child: Text(_quickPrompts[index], style: const TextStyle(fontSize: 8, color: Colors.grey)),
                         ),
                       ),
                     );
@@ -237,8 +235,8 @@ class _SmartTripAIChatState extends State<SmartTripAIChat> {
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: const BoxDecoration(
-                  color: Color(0xFF16212B),
-                  border: Border(top: BorderSide(color: Color(0xFF1F2A37))),
+                  color: Colors.black,
+                  border: Border(top: BorderSide(color: Color(0xFF333333))),
                 ),
                 child: Row(
                   children: [
@@ -246,16 +244,16 @@ class _SmartTripAIChatState extends State<SmartTripAIChat> {
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 12),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF0B1117),
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: const Color(0xFF1F2A37)),
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(4),
+                          border: Border.all(color: const Color(0xFF333333)),
                         ),
                         child: TextField(
                           controller: _controller,
-                          style: const TextStyle(fontSize: 10, fontFamily: 'monospace', color: Colors.white),
+                          style: const TextStyle(fontSize: 10, color: Colors.white),
                           decoration: const InputDecoration(
                             hintText: "Ask trip AI (e.g. 'Show fuel cost wasted')...",
-                            hintStyle: TextStyle(fontSize: 10, fontFamily: 'monospace', color: Color(0xFF9FB3C8)),
+                            hintStyle: TextStyle(fontSize: 10, color: Colors.grey),
                             border: InputBorder.none,
                           ),
                           onSubmitted: (val) => _handleSend(),
@@ -268,10 +266,10 @@ class _SmartTripAIChatState extends State<SmartTripAIChat> {
                       child: Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: _isLoading ? const Color(0xFF00B8D4).withOpacity(0.5) : const Color(0xFF00B8D4),
-                          borderRadius: BorderRadius.circular(12),
+                          color: _isLoading ? const Color(0xFF333333) : Colors.white,
+                          borderRadius: BorderRadius.circular(4),
                         ),
-                        child: const Icon(LucideIcons.cornerDownLeft, size: 16, color: Colors.white),
+                        child: Icon(LucideIcons.cornerDownLeft, size: 16, color: _isLoading ? Colors.grey : Colors.black),
                       ),
                     ),
                   ],
