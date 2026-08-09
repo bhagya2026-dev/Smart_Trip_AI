@@ -15,11 +15,7 @@ class RadialScoreGauge extends StatelessWidget {
   });
 
   Color _getScoreColor(double value) {
-    if (value >= 90) return const Color(0xFF00E676); // Primary Electric Green
-    if (value >= 75) return const Color(0xFF00B8D4); // Teal
-    if (value >= 60) return const Color(0xFFFFC107); // Yellow
-    if (value >= 40) return const Color(0xFFF97316); // Orange
-    return const Color(0xFFFF5252);                  // Red
+    return Colors.white;
   }
 
   String _getScoreLabel(double value) {
@@ -54,23 +50,23 @@ class RadialScoreGauge extends StatelessWidget {
           isWalking: isWalking,
           metrics: isWalking
               ? [
-                  _MetricItem('Pacing:', 'Steady', const Color(0xFF00B8D4)),
-                  _MetricItem('Motion:', 'Smooth', const Color(0xFF00E676)),
-                  _MetricItem('Stoppages:', 'Minimal', const Color(0xFF00E676)),
+                  _MetricItem('Pacing:', 'Steady', Colors.white),
+                  _MetricItem('Motion:', 'Smooth', Colors.white),
+                  _MetricItem('Stoppages:', 'Minimal', Colors.white),
                 ]
               : [
                   _MetricItem(
                       'Hard Accel:',
                       score.hardAccelerationsCount.toString(),
-                      score.hardAccelerationsCount > 0 ? const Color(0xFFFFC107) : const Color(0xFF00E676)),
+                      Colors.grey),
                   _MetricItem(
                       'Hard Brakes:',
                       score.hardBrakesCount.toString(),
-                      score.hardBrakesCount > 0 ? const Color(0xFFFF5252) : const Color(0xFF00E676)),
+                      Colors.grey),
                   _MetricItem(
                       'Sharp Swerves:',
                       score.sharpSwervesCount.toString(),
-                      score.sharpSwervesCount > 0 ? const Color(0xFF00B8D4) : const Color(0xFF00E676)),
+                      Colors.grey),
                 ],
         ),
 
@@ -84,14 +80,14 @@ class RadialScoreGauge extends StatelessWidget {
           isWalking: isWalking,
           metrics: isWalking
               ? [
-                  _MetricItem('Carbon Output:', '0 g CO₂', const Color(0xFF00E676)),
-                  _MetricItem('Eco Rating:', '100% GREEN', const Color(0xFF00E676)),
-                  _MetricItem('Health Bonus:', '+50 pts', const Color(0xFF00B8D4)),
+                  _MetricItem('Carbon Output:', '0 g CO₂', Colors.white),
+                  _MetricItem('Eco Rating:', '100% GREEN', Colors.white),
+                  _MetricItem('Health Bonus:', '+50 pts', Colors.white),
                 ]
               : [
-                  _MetricItem('Idle Time:', '\${score.idleTimeSeconds}s', const Color(0xFFE6F1FF)),
-                  _MetricItem('Eco Rating:', _getScoreLabel(score.ecoScore), const Color(0xFF00E676)),
-                  _MetricItem('Idle Waste:', '0 pts', const Color(0xFF00E676)),
+                  _MetricItem('Idle Time:', '${score.idleTimeSeconds}s', Colors.white),
+                  _MetricItem('Eco Rating:', _getScoreLabel(score.ecoScore), Colors.grey),
+                  _MetricItem('Idle Waste:', '0 pts', Colors.grey),
                 ],
         ),
       ],
@@ -110,9 +106,9 @@ class RadialScoreGauge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFF16212B),
-        border: Border.all(color: const Color(0xFF1F2A37)),
-        borderRadius: BorderRadius.circular(12),
+        color: Colors.black,
+        border: Border.all(color: const Color(0xFF333333)),
+        borderRadius: BorderRadius.circular(4),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -127,10 +123,9 @@ class RadialScoreGauge extends StatelessWidget {
                   Text(
                     title,
                     style: const TextStyle(
-                      color: Color(0xFFE6F1FF),
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 10,
-                      fontFamily: 'monospace',
                     ),
                   ),
                 ],
@@ -138,9 +133,9 @@ class RadialScoreGauge extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                 decoration: BoxDecoration(
-                  color: mainColor.withOpacity(0.15),
-                  border: Border.all(color: mainColor.withOpacity(0.4)),
-                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.black,
+                  border: Border.all(color: const Color(0xFF333333)),
+                  borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(
                   badgeLabel,
@@ -153,7 +148,7 @@ class RadialScoreGauge extends StatelessWidget {
               ),
             ],
           ),
-          const Divider(color: Color(0xFF1F2A37), height: 16),
+          const Divider(color: Color(0xFF333333), height: 16),
           Expanded(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -182,17 +177,15 @@ class RadialScoreGauge extends StatelessWidget {
                           scoreValue.round().toString(),
                           style: const TextStyle(
                             fontSize: 20,
-                            fontWeight: FontWeight.w800,
-                            fontFamily: 'monospace',
-                            color: Color(0xFFE6F1FF),
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
                           ),
                         ),
                         const Text(
                           '/ 100',
                           style: TextStyle(
                             fontSize: 9,
-                            fontFamily: 'monospace',
-                            color: Color(0xFF9FB3C8),
+                            color: Colors.grey,
                           ),
                         ),
                       ],
@@ -214,8 +207,7 @@ class RadialScoreGauge extends StatelessWidget {
                             m.label,
                             style: const TextStyle(
                               fontSize: 10,
-                              fontFamily: 'monospace',
-                              color: Color(0xFF9FB3C8),
+                              color: Colors.grey,
                             ),
                           ),
                           const SizedBox(width: 4),
@@ -223,7 +215,6 @@ class RadialScoreGauge extends StatelessWidget {
                             m.value,
                             style: TextStyle(
                               fontSize: 10,
-                              fontFamily: 'monospace',
                               fontWeight: FontWeight.bold,
                               color: m.valueColor,
                             ),
@@ -262,7 +253,7 @@ class CircularScorePainter extends CustomPainter {
     final radius = size.width / 2 - 4;
 
     final bgPaint = Paint()
-      ..color = const Color(0xFF1F2A37)
+      ..color = const Color(0xFF333333)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 6
       ..strokeCap = StrokeCap.round;
