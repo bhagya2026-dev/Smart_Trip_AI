@@ -75,9 +75,9 @@ class SpeedometerGForceHUD extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: const Color(0xFF16212B),
-            border: Border.all(color: const Color(0xFF1F2A37)),
-            borderRadius: BorderRadius.circular(12),
+            color: Colors.black,
+            border: Border.all(color: const Color(0xFF333333)),
+            borderRadius: BorderRadius.circular(4),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -89,33 +89,32 @@ class SpeedometerGForceHUD extends StatelessWidget {
                     children: [
                       Icon(
                         isWalking ? LucideIcons.footprints : LucideIcons.gauge,
-                        color: isWalking ? const Color(0xFF00B8D4) : const Color(0xFF00E676),
+                        color: Colors.white,
                         size: 16,
                       ),
                       const SizedBox(width: 6),
                       Text(
                         isWalking ? 'LIVE WALKING PACE' : 'LIVE VEHICLE SPEED',
                         style: const TextStyle(
-                            color: Color(0xFFE6F1FF),
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
-                            fontSize: 12,
-                            fontFamily: 'monospace'),
+                            fontSize: 12),
                       ),
                     ],
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                     decoration: BoxDecoration(
-                      color: isWalking ? const Color(0xFF00B8D4).withOpacity(0.1) : const Color(0xFF00E676).withOpacity(0.1),
-                      border: Border.all(color: isWalking ? const Color(0xFF00B8D4).withOpacity(0.3) : const Color(0xFF00E676).withOpacity(0.3)),
-                      borderRadius: BorderRadius.circular(6),
+                      color: Colors.black,
+                      border: Border.all(color: const Color(0xFF333333)),
+                      borderRadius: BorderRadius.circular(4),
                     ),
                     child: Text(
                       isWalking
-                          ? "PEAK: \${maxSpeedKmH > 0 ? (maxSpeedKmH * 0.1).toStringAsFixed(1) : '5.2'} KM/H"
-                          : 'MAX: \${maxSpeedKmH.round()} KM/H',
-                      style: TextStyle(
-                        color: isWalking ? const Color(0xFF00B8D4) : const Color(0xFF00E676),
+                          ? "PEAK: ${maxSpeedKmH > 0 ? (maxSpeedKmH * 0.1).toStringAsFixed(1) : '5.2'} KM/H"
+                          : 'MAX: ${maxSpeedKmH.round()} KM/H',
+                      style: const TextStyle(
+                        color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 11,
                       ),
@@ -147,9 +146,8 @@ class SpeedometerGForceHUD extends StatelessWidget {
                           currentSpeed.toStringAsFixed(isWalking ? 1 : 0),
                           style: const TextStyle(
                             fontSize: 32,
-                            fontWeight: FontWeight.w800,
-                            fontFamily: 'monospace',
-                            color: Color(0xFFE6F1FF),
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
                           ),
                         ),
                         Text(
@@ -157,8 +155,7 @@ class SpeedometerGForceHUD extends StatelessWidget {
                           style: const TextStyle(
                             fontSize: 9,
                             fontWeight: FontWeight.bold,
-                            fontFamily: 'monospace',
-                            color: Color(0xFF9FB3C8),
+                            color: Colors.grey,
                           ),
                         ),
                       ],
@@ -174,9 +171,9 @@ class SpeedometerGForceHUD extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: const Color(0xFF16212B),
-            border: Border.all(color: const Color(0xFF1F2A37)),
-            borderRadius: BorderRadius.circular(12),
+            color: Colors.black,
+            border: Border.all(color: const Color(0xFF333333)),
+            borderRadius: BorderRadius.circular(4),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -188,31 +185,30 @@ class SpeedometerGForceHUD extends StatelessWidget {
                     children: [
                       Icon(
                         isWalking ? LucideIcons.sparkles : LucideIcons.fuel,
-                        color: const Color(0xFF00B8D4),
+                        color: Colors.white,
                         size: 16,
                       ),
                       const SizedBox(width: 6),
                       Text(
                         isWalking ? 'PEDESTRIAN FITNESS' : 'FUEL SPEND',
                         style: const TextStyle(
-                            color: Color(0xFFE6F1FF),
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
-                            fontSize: 12,
-                            fontFamily: 'monospace'),
+                            fontSize: 12),
                       ),
                     ],
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF00E676).withOpacity(0.1),
-                      border: Border.all(color: const Color(0xFF00E676).withOpacity(0.3)),
-                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.black,
+                      border: Border.all(color: const Color(0xFF333333)),
+                      borderRadius: BorderRadius.circular(4),
                     ),
                     child: Text(
-                      isWalking ? 'ZERO EMISSIONS' : 'Rs. \${vehicleConfig.fuelPricePerLiter}/L',
+                      isWalking ? 'ZERO EMISSIONS' : 'Rs. ${vehicleConfig.fuelPricePerLiter}/L',
                       style: const TextStyle(
-                        color: Color(0xFF00E676),
+                        color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 10,
                       ),
@@ -220,7 +216,7 @@ class SpeedometerGForceHUD extends StatelessWidget {
                   ),
                 ],
               ),
-              const Divider(color: Color(0xFF1F2A37), height: 16),
+              const Divider(color: Color(0xFF333333), height: 16),
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -228,27 +224,27 @@ class SpeedometerGForceHUD extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF111A23),
-                        border: Border.all(color: const Color(0xFF1F2A37)),
-                        borderRadius: BorderRadius.circular(12),
+                        color: Colors.black,
+                        border: Border.all(color: const Color(0xFF333333)),
+                        borderRadius: BorderRadius.circular(4),
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
                             children: [
-                              Icon(isWalking ? LucideIcons.footprints : LucideIcons.wallet, color: const Color(0xFF00B8D4), size: 16),
+                              Icon(isWalking ? LucideIcons.footprints : LucideIcons.wallet, color: Colors.white, size: 16),
                               const SizedBox(width: 6),
                               Text(isWalking ? 'REAL-TIME STEPS:' : 'SPENT SO FAR:',
-                                  style: const TextStyle(fontSize: 12, color: Color(0xFF9FB3C8), fontFamily: 'monospace')),
+                                  style: const TextStyle(fontSize: 12, color: Colors.grey)),
                             ],
                           ),
                           Text(
-                            isWalking ? '\$stepsTaken steps' : 'Rs. \${totalLiveCostLkr.toStringAsFixed(2)}',
-                            style: TextStyle(
+                            isWalking ? '$stepsTaken steps' : 'Rs. ${totalLiveCostLkr.toStringAsFixed(2)}',
+                            style: const TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.w800,
-                              color: isWalking ? const Color(0xFF00B8D4) : const Color(0xFF00E676),
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
                             ),
                           ),
                         ],
@@ -260,28 +256,28 @@ class SpeedometerGForceHUD extends StatelessWidget {
                           child: Container(
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
-                              color: const Color(0xFF111A23),
-                              border: Border.all(color: const Color(0xFF1F2A37)),
-                              borderRadius: BorderRadius.circular(12),
+                              color: Colors.black,
+                              border: Border.all(color: const Color(0xFF333333)),
+                              borderRadius: BorderRadius.circular(4),
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
                                   children: [
-                                    if (isWalking) const Icon(LucideIcons.flame, color: Color(0xFFFF5252), size: 12),
+                                    if (isWalking) const Icon(LucideIcons.flame, color: Colors.white, size: 12),
                                     if (isWalking) const SizedBox(width: 4),
                                     Text(isWalking ? 'CALORIES BURNED' : 'LIVE FUEL BURNED',
-                                        style: const TextStyle(fontSize: 9, color: Color(0xFF9FB3C8))),
+                                        style: const TextStyle(fontSize: 9, color: Colors.grey)),
                                   ],
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
-                                  isWalking ? '\$caloriesBurned kcal' : '\${totalLiveLiters.toStringAsFixed(2)} L',
-                                  style: TextStyle(
+                                  isWalking ? '$caloriesBurned kcal' : '${totalLiveLiters.toStringAsFixed(2)} L',
+                                  style: const TextStyle(
                                     fontSize: 14,
-                                    fontWeight: FontWeight.w800,
-                                    color: isWalking ? const Color(0xFFFF5252) : const Color(0xFFE6F1FF),
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
                                   ),
                                 ),
                               ],
@@ -293,22 +289,22 @@ class SpeedometerGForceHUD extends StatelessWidget {
                           child: Container(
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
-                              color: const Color(0xFF111A23),
-                              border: Border.all(color: const Color(0xFF1F2A37)),
-                              borderRadius: BorderRadius.circular(12),
+                              color: Colors.black,
+                              border: Border.all(color: const Color(0xFF333333)),
+                              borderRadius: BorderRadius.circular(4),
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(isWalking ? 'FUEL SAVED' : 'EST. TRIP FUEL',
-                                    style: const TextStyle(fontSize: 9, color: Color(0xFF9FB3C8))),
+                                    style: const TextStyle(fontSize: 9, color: Colors.grey)),
                                 const SizedBox(height: 4),
                                 Text(
-                                  isWalking ? '0.0 L (Rs. 0)' : '\${estTotalLiters.toStringAsFixed(2)} L',
-                                  style: TextStyle(
+                                  isWalking ? '0.0 L (Rs. 0)' : '${estTotalLiters.toStringAsFixed(2)} L',
+                                  style: const TextStyle(
                                     fontSize: 14,
-                                    fontWeight: FontWeight.w800,
-                                    color: isWalking ? const Color(0xFF00E676) : const Color(0xFF00B8D4),
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
                                   ),
                                 ),
                               ],
@@ -340,13 +336,13 @@ class GaugePainter extends CustomPainter {
     final radius = size.width / 2 - 10;
     
     final bgPaint = Paint()
-      ..color = const Color(0xFF1F2A37)
+      ..color = const Color(0xFF333333)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 10
       ..strokeCap = StrokeCap.round;
 
     final fgPaint = Paint()
-      ..color = isWalking ? const Color(0xFF00B8D4) : const Color(0xFF00E676)
+      ..color = Colors.white
       ..style = PaintingStyle.stroke
       ..strokeWidth = 10
       ..strokeCap = StrokeCap.round;
