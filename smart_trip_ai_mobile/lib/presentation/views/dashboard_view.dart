@@ -51,7 +51,7 @@ class DashboardView extends StatelessWidget {
 
     return SingleChildScrollView(
       child: Container(
-        color: const Color(0xFF0B1117),
+        color: Colors.black,
         padding: const EdgeInsets.only(bottom: 100),
         child: Column(
           children: [
@@ -68,15 +68,15 @@ class DashboardView extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF16212B),
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: const Color(0xFF1F2A37)),
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(4),
+                      border: Border.all(color: const Color(0xFF333333)),
                     ),
                     child: const Row(
                       children: [
-                        Icon(LucideIcons.search, color: Color(0xFF9FB3C8), size: 16),
+                        Icon(LucideIcons.search, color: Colors.grey, size: 16),
                         SizedBox(width: 12),
-                        Text('Search Wadduwa, Panadura, Kalutara...', style: TextStyle(color: Color(0xFF9FB3C8), fontSize: 12)),
+                        Text('Search Wadduwa, Panadura, Kalutara...', style: TextStyle(color: Colors.grey, fontSize: 12)),
                       ],
                     ),
                   ),
@@ -119,16 +119,16 @@ class DashboardView extends StatelessWidget {
                   Container(
                     height: 250,
                     decoration: BoxDecoration(
-                      color: const Color(0xFF16212B),
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: const Color(0xFF1F2A37)),
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(4),
+                      border: Border.all(color: const Color(0xFF333333)),
                       image: const DecorationImage(
                         image: NetworkImage('https://maps.googleapis.com/maps/api/staticmap?center=6.9271,79.8612&zoom=12&size=600x300&maptype=roadmap&key=DUMMY'),
                         fit: BoxFit.cover,
                       ),
                     ),
                     child: const Center(
-                      child: Text('Interactive Route Map (Flutter Map)', style: TextStyle(color: Color(0xFF00E676), fontWeight: FontWeight.bold, backgroundColor: Colors.black54)),
+                      child: Text('Interactive Route Map (Flutter Map)', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, backgroundColor: Colors.black54)),
                     ),
                   ),
                 ],
