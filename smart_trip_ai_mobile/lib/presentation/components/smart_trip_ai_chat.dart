@@ -60,7 +60,7 @@ class _SmartTripAIChatState extends State<SmartTripAIChat> {
   @override
   Widget build(BuildContext context) {
       return Positioned(
-        bottom: 24,
+        bottom: 90,
         right: 24,
         child: FloatingActionButton.extended(
           onPressed: () => setState(() => _isOpen = true),
@@ -71,7 +71,7 @@ class _SmartTripAIChatState extends State<SmartTripAIChat> {
       );
 
     return Positioned(
-      bottom: 24,
+      bottom: 90,
       right: 24,
       width: 360,
       height: 540,
