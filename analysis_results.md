@@ -1,3 +1,4 @@
+
 # Smart Trip AI - Project Analysis
 
 ## Overview
