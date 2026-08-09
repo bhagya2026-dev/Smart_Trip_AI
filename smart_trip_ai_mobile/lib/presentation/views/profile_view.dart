@@ -62,7 +62,7 @@ class _ProfileViewState extends State<ProfileView> {
     return SingleChildScrollView(
       child: Container(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 100),
-        color: const Color(0xFF0B1117),
+        color: Colors.black,
         child: Column(
           children: [
             // 1. Driver Profile Hero Header Card
@@ -93,9 +93,9 @@ class _ProfileViewState extends State<ProfileView> {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: const Color(0xFF16212B),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFF1F2A37)),
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(4),
+        border: Border.all(color: const Color(0xFF333333)),
       ),
       child: Stack(
         children: [
@@ -129,18 +129,12 @@ class _ProfileViewState extends State<ProfileView> {
                     width: 80,
                     height: 80,
                     decoration: BoxDecoration(
-                      color: const Color(0xFF16212B),
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: const Color(0xFF00E676), width: 2),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color(0xFF00E676).withOpacity(0.3),
-                          blurRadius: 10,
-                        )
-                      ],
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(4),
+                      border: Border.all(color: const Color(0xFF333333), width: 1),
                     ),
                     child: const Center(
-                      child: Icon(LucideIcons.user, size: 40, color: Color(0xFF00E676)),
+                      child: Icon(LucideIcons.user, size: 40, color: Colors.white),
                     ),
                   ),
                   Positioned(
@@ -205,9 +199,9 @@ class _ProfileViewState extends State<ProfileView> {
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF00E676).withOpacity(0.15),
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: const Color(0xFF00E676).withOpacity(0.4)),
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(4),
+                            border: Border.all(color: const Color(0xFF333333)),
                           ),
                           child: Row(
                             children: [
@@ -216,7 +210,7 @@ class _ProfileViewState extends State<ProfileView> {
                                 height: 6,
                                 decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: Color(0xFF00E676),
+                                  color: Colors.white,
                                 ),
                               ),
                               const SizedBox(width: 4),
@@ -225,8 +219,7 @@ class _ProfileViewState extends State<ProfileView> {
                                 style: TextStyle(
                                   fontSize: 8,
                                   fontWeight: FontWeight.bold,
-                                  fontFamily: 'monospace',
-                                  color: Color(0xFF00E676),
+                                  color: Colors.white,
                                 ),
                               ),
                             ],
@@ -239,7 +232,7 @@ class _ProfileViewState extends State<ProfileView> {
                         padding: const EdgeInsets.only(top: 4.0),
                         child: TextField(
                           controller: _titleController,
-                          style: const TextStyle(color: Color(0xFF00B8D4), fontSize: 12, fontFamily: 'monospace'),
+                          style: const TextStyle(color: Colors.grey, fontSize: 12),
                           decoration: const InputDecoration(
                             isDense: true,
                             contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -250,7 +243,7 @@ class _ProfileViewState extends State<ProfileView> {
                     else
                       Text(
                         userTitle,
-                        style: const TextStyle(color: Color(0xFF00B8D4), fontSize: 12, fontFamily: 'monospace'),
+                        style: const TextStyle(color: Colors.grey, fontSize: 12),
                       ),
                     
                     const SizedBox(height: 12),
@@ -287,24 +280,23 @@ class _ProfileViewState extends State<ProfileView> {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: const Color(0xFF16212B),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFF1F2A37)),
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(4),
+        border: Border.all(color: const Color(0xFF333333)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Row(
             children: [
-              Icon(LucideIcons.shieldCheck, size: 16, color: Color(0xFF00E676)),
+              Icon(LucideIcons.shieldCheck, size: 16, color: Colors.white),
               SizedBox(width: 8),
               Text(
                 'DRIVER SAFETY & TELEMATICS RATING',
                 style: TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.bold,
-                  fontFamily: 'monospace',
-                  color: Color(0xFFE6F1FF),
+                  color: Colors.white,
                 ),
               ),
             ],
@@ -317,9 +309,9 @@ class _ProfileViewState extends State<ProfileView> {
             crossAxisSpacing: 12,
             childAspectRatio: 0.75,
             children: [
-              _buildGaugeItem('SAFETY SCORE', widget.avgSafetyScore, const Color(0xFF00E676), 'EXCELLENT RATING'),
-              _buildGaugeItem('ECO EFFICIENCY', ecoScoreVal, const Color(0xFF00B8D4), 'HIGH EFFICIENCY'),
-              _buildGaugeItem('OVERALL DRIVER RATING', overallRatingVal, const Color(0xFFEEFC07), 'VERIFIED DRIVER'),
+              _buildGaugeItem('SAFETY SCORE', widget.avgSafetyScore, Colors.white, 'EXCELLENT RATING'),
+              _buildGaugeItem('ECO EFFICIENCY', ecoScoreVal, Colors.white, 'HIGH EFFICIENCY'),
+              _buildGaugeItem('OVERALL DRIVER RATING', overallRatingVal, Colors.white, 'VERIFIED DRIVER'),
             ],
           ),
         ],
@@ -331,14 +323,14 @@ class _ProfileViewState extends State<ProfileView> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFF111A23),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFF1F2A37)),
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(4),
+        border: Border.all(color: const Color(0xFF333333)),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(title, style: const TextStyle(fontSize: 8, fontWeight: FontWeight.bold, fontFamily: 'monospace', color: Color(0xFF9FB3C8)), textAlign: TextAlign.center),
+          Text(title, style: const TextStyle(fontSize: 8, fontWeight: FontWeight.bold, color: Colors.grey), textAlign: TextAlign.center),
           const SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -346,11 +338,11 @@ class _ProfileViewState extends State<ProfileView> {
             children: [
               Text(
                 score.toString(),
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: color),
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: color),
               ),
               const Padding(
                 padding: EdgeInsets.only(bottom: 4, left: 4),
-                child: Text('/ 100', style: TextStyle(fontSize: 8, color: Color(0xFF9FB3C8))),
+                child: Text('/ 100', style: TextStyle(fontSize: 8, color: Colors.grey)),
               ),
             ],
           ),
@@ -358,9 +350,9 @@ class _ProfileViewState extends State<ProfileView> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
-              color: color.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: color.withOpacity(0.3)),
+              color: Colors.black,
+              borderRadius: BorderRadius.circular(4),
+              border: Border.all(color: const Color(0xFF333333)),
             ),
             child: Text(
               badge,
@@ -382,9 +374,9 @@ class _ProfileViewState extends State<ProfileView> {
       mainAxisSpacing: 12,
       childAspectRatio: 1.5,
       children: [
-        _buildStatCard('TOTAL LOGGED TRIPS', '\${widget.totalTripsCount} Drives', 'SQLite Persistence', const Color(0xFF00E676), LucideIcons.car),
-        _buildStatCard('TOTAL DISTANCE', '\${widget.totalDistanceKm.toStringAsFixed(1)} km', 'Covered in Sri Lanka', const Color(0xFF00B8D4), LucideIcons.leaf),
-        _buildStatCard('SENSOR STREAM', 'REAL-TIME GPS', 'Hardware WatchPosition', const Color(0xFFEEFC07), LucideIcons.zap),
+        _buildStatCard('TOTAL LOGGED TRIPS', '${widget.totalTripsCount} Drives', 'SQLite Persistence', Colors.white, LucideIcons.car),
+        _buildStatCard('TOTAL DISTANCE', '${widget.totalDistanceKm.toStringAsFixed(1)} km', 'Covered in Sri Lanka', Colors.white, LucideIcons.leaf),
+        _buildStatCard('SENSOR STREAM', 'REAL-TIME GPS', 'Hardware WatchPosition', Colors.white, LucideIcons.zap),
       ],
     );
   }
@@ -393,14 +385,9 @@ class _ProfileViewState extends State<ProfileView> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFF16212B),
-        borderRadius: BorderRadius.circular(12),
-        border: Border(
-          left: BorderSide(color: color, width: 4),
-          top: const BorderSide(color: Color(0xFF1F2A37)),
-          right: const BorderSide(color: Color(0xFF1F2A37)),
-          bottom: const BorderSide(color: Color(0xFF1F2A37)),
-        ),
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(4),
+        border: Border.all(color: const Color(0xFF333333), width: 1),
       ),
       child: Stack(
         children: [
@@ -408,11 +395,11 @@ class _ProfileViewState extends State<ProfileView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(title, style: const TextStyle(fontSize: 8, color: Color(0xFF9FB3C8), fontFamily: 'monospace')),
+              Text(title, style: const TextStyle(fontSize: 8, color: Colors.grey)),
               const SizedBox(height: 4),
-              Text(value, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: color)),
+              Text(value, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: color)),
               const SizedBox(height: 4),
-              Text(subtitle, style: TextStyle(fontSize: 8, color: color, fontFamily: 'monospace')),
+              Text(subtitle, style: TextStyle(fontSize: 8, color: Colors.grey)),
             ],
           ),
           Positioned(
@@ -429,34 +416,33 @@ class _ProfileViewState extends State<ProfileView> {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: const Color(0xFF16212B),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFF1F2A37)),
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(4),
+        border: Border.all(color: const Color(0xFF333333)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Row(
             children: [
-              Icon(LucideIcons.award, size: 16, color: Color(0xFF00E676)),
+              Icon(LucideIcons.award, size: 16, color: Colors.white),
               SizedBox(width: 8),
               Text(
                 'DRIVER ACHIEVEMENTS & CERTIFICATIONS',
                 style: TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.bold,
-                  fontFamily: 'monospace',
-                  color: Color(0xFFE6F1FF),
+                  color: Colors.white,
                 ),
               ),
             ],
           ),
           const SizedBox(height: 16),
-          _buildAchievementItem('Smooth Driver', 'Zero hard accel events', LucideIcons.shieldCheck, const Color(0xFF00E676)),
+          _buildAchievementItem('Smooth Driver', 'Zero hard accel events', LucideIcons.shieldCheck, Colors.white),
           const SizedBox(height: 12),
-          _buildAchievementItem('Eco Master', 'Efficient drive rating', LucideIcons.fuel, const Color(0xFF00B8D4)),
+          _buildAchievementItem('Eco Master', 'Efficient drive rating', LucideIcons.fuel, Colors.white),
           const SizedBox(height: 12),
-          _buildAchievementItem('Sri Lanka Highways', 'Galle Road A2 Verified', LucideIcons.car, const Color(0xFFEEFC07)),
+          _buildAchievementItem('Sri Lanka Highways', 'Galle Road A2 Verified', LucideIcons.car, Colors.white),
         ],
       ),
     );
@@ -466,17 +452,18 @@ class _ProfileViewState extends State<ProfileView> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFF111A23),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFF1F2A37)),
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(4),
+        border: Border.all(color: const Color(0xFF333333)),
       ),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: color.withOpacity(0.2),
-              borderRadius: BorderRadius.circular(12),
+              color: Colors.black,
+              borderRadius: BorderRadius.circular(4),
+              border: Border.all(color: const Color(0xFF333333)),
             ),
             child: Icon(icon, color: color, size: 20),
           ),
@@ -484,8 +471,8 @@ class _ProfileViewState extends State<ProfileView> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFFE6F1FF))),
-              Text(subtitle, style: const TextStyle(fontSize: 10, fontFamily: 'monospace', color: Color(0xFF9FB3C8))),
+              Text(title, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white)),
+              Text(subtitle, style: const TextStyle(fontSize: 10, color: Colors.grey)),
             ],
           ),
         ],
@@ -497,9 +484,9 @@ class _ProfileViewState extends State<ProfileView> {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: const Color(0xFF16212B),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFF1F2A37)),
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(4),
+        border: Border.all(color: const Color(0xFF333333)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -509,35 +496,35 @@ class _ProfileViewState extends State<ProfileView> {
             children: [
               Row(
                 children: [
-                  Icon(LucideIcons.car, size: 16, color: Color(0xFF00E676)),
+                  Icon(LucideIcons.car, size: 16, color: Colors.white),
                   SizedBox(width: 8),
                   Text(
                     'REGISTERED VEHICLE SPECIFICATIONS',
                     style: TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.bold,
-                      fontFamily: 'monospace',
-                      color: Color(0xFFE6F1FF),
+                      color: Colors.white,
                     ),
                   ),
                 ],
               ),
-              Text('ACTIVE', style: TextStyle(fontSize: 10, fontFamily: 'monospace', color: Color(0xFF00E676))),
+              Text('ACTIVE', style: TextStyle(fontSize: 10, color: Colors.white)),
             ],
           ),
           const SizedBox(height: 16),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Vehicle Name:', style: TextStyle(fontSize: 10, color: Color(0xFF9FB3C8))),
+              const Text('Vehicle Name:', style: TextStyle(fontSize: 10, color: Colors.grey)),
               const SizedBox(height: 4),
               TextField(
                 controller: _vehicleNameController,
-                style: const TextStyle(fontSize: 12, color: Color(0xFFE6F1FF)),
+                style: const TextStyle(fontSize: 12, color: Colors.white),
                 decoration: const InputDecoration(
                   filled: true,
-                  fillColor: Color(0xFF111A23),
-                  border: OutlineInputBorder(borderSide: BorderSide.none),
+                  fillColor: Colors.black,
+                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF333333))),
+                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
                   isDense: true,
                   contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                 ),
@@ -547,16 +534,17 @@ class _ProfileViewState extends State<ProfileView> {
                 },
               ),
               const SizedBox(height: 12),
-              const Text('Fuel Price (LKR / Liter):', style: TextStyle(fontSize: 10, color: Color(0xFF9FB3C8))),
+              const Text('Fuel Price (LKR / Liter):', style: TextStyle(fontSize: 10, color: Colors.grey)),
               const SizedBox(height: 4),
               TextField(
                 controller: _fuelPriceController,
                 keyboardType: TextInputType.number,
-                style: const TextStyle(fontSize: 12, color: Color(0xFFE6F1FF)),
+                style: const TextStyle(fontSize: 12, color: Colors.white),
                 decoration: const InputDecoration(
                   filled: true,
-                  fillColor: Color(0xFF111A23),
-                  border: OutlineInputBorder(borderSide: BorderSide.none),
+                  fillColor: Colors.black,
+                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF333333))),
+                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
                   isDense: true,
                   contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                 ),
