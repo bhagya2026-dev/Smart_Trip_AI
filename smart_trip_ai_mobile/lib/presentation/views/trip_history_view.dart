@@ -32,7 +32,7 @@ class _TripHistoryViewState extends State<TripHistoryView> {
     return SingleChildScrollView(
       child: Container(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 100),
-        color: const Color(0xFF0B1117),
+        color: Colors.black,
         child: Column(
           children: [
             // Header Bar
@@ -53,16 +53,16 @@ class _TripHistoryViewState extends State<TripHistoryView> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFF16212B),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFF1F2A37)),
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(4),
+        border: Border.all(color: const Color(0xFF333333)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Row(
             children: [
-              Icon(LucideIcons.calendar, size: 20, color: Color(0xFF00E676)),
+              Icon(LucideIcons.calendar, size: 20, color: Colors.white),
               SizedBox(width: 8),
               Expanded(
                 child: Text(
@@ -70,8 +70,7 @@ class _TripHistoryViewState extends State<TripHistoryView> {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
-                    fontFamily: 'monospace',
-                    color: Color(0xFFE6F1FF),
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -82,8 +81,7 @@ class _TripHistoryViewState extends State<TripHistoryView> {
             'Relational SQLite persistent storage | 3 Recorded Trips',
             style: TextStyle(
               fontSize: 10,
-              fontFamily: 'monospace',
-              color: Color(0xFF9FB3C8),
+              color: Colors.grey,
             ),
           ),
           const SizedBox(height: 16),
@@ -93,24 +91,24 @@ class _TripHistoryViewState extends State<TripHistoryView> {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF16212B),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: const Color(0xFF1F2A37)),
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(4),
+                    border: Border.all(color: const Color(0xFF333333)),
                   ),
                   child: Row(
                     children: [
-                      const Icon(LucideIcons.filter, size: 14, color: Color(0xFF9FB3C8)),
+                      const Icon(LucideIcons.filter, size: 14, color: Colors.grey),
                       const SizedBox(width: 8),
-                      const Text('Sort:', style: TextStyle(fontSize: 10, color: Color(0xFF9FB3C8), fontFamily: 'monospace')),
+                      const Text('Sort:', style: TextStyle(fontSize: 10, color: Colors.grey)),
                       const SizedBox(width: 8),
                       Expanded(
                         child: DropdownButtonHideUnderline(
                           child: DropdownButton<String>(
                             value: _filterSort,
                             isExpanded: true,
-                            dropdownColor: const Color(0xFF0B1117),
-                            icon: const Icon(LucideIcons.chevronDown, size: 14, color: Color(0xFFE6F1FF)),
-                            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFFE6F1FF)),
+                            dropdownColor: Colors.black,
+                            icon: const Icon(LucideIcons.chevronDown, size: 14, color: Colors.white),
+                            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white),
                             onChanged: (val) {
                               if (val != null) setState(() => _filterSort = val);
                             },
@@ -128,9 +126,9 @@ class _TripHistoryViewState extends State<TripHistoryView> {
                 ),
               ),
               const SizedBox(width: 8),
-              _buildExportBtn('JSON', const Color(0xFF00B8D4)),
+              _buildExportBtn('JSON', Colors.white),
               const SizedBox(width: 8),
-              _buildExportBtn('CSV', const Color(0xFF00E676)),
+              _buildExportBtn('CSV', Colors.white),
             ],
           ),
         ],
@@ -142,15 +140,15 @@ class _TripHistoryViewState extends State<TripHistoryView> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
       decoration: BoxDecoration(
-        color: const Color(0xFF16212B),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFF1F2A37)),
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(4),
+        border: Border.all(color: const Color(0xFF333333)),
       ),
       child: Row(
         children: [
           Icon(LucideIcons.download, size: 14, color: color),
           const SizedBox(width: 4),
-          Text(label, style: const TextStyle(fontSize: 10, fontFamily: 'monospace', color: Color(0xFFE6F1FF))),
+          Text(label, style: const TextStyle(fontSize: 10, color: Colors.white)),
         ],
       ),
     );
@@ -160,27 +158,27 @@ class _TripHistoryViewState extends State<TripHistoryView> {
     return Container(
       padding: const EdgeInsets.all(32),
       decoration: BoxDecoration(
-        color: const Color(0xFF16212B),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFF1F2A37)),
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(4),
+        border: Border.all(color: const Color(0xFF333333)),
       ),
       child: Column(
         children: [
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: const Color(0xFF00E676).withOpacity(0.15),
+              color: const Color(0xFF111111),
               shape: BoxShape.circle,
             ),
-            child: const Icon(LucideIcons.calendar, size: 32, color: Color(0xFF00E676)),
+            child: const Icon(LucideIcons.calendar, size: 32, color: Colors.white),
           ),
           const SizedBox(height: 16),
-          const Text('NO TRIPS RECORDED YET', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xFFE6F1FF))),
+          const Text('NO TRIPS RECORDED YET', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white)),
           const SizedBox(height: 8),
           const Text(
             'Start your first trip to record distance, fuel usage, safety score, eco score, and driving insights.',
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 10, color: Color(0xFF9FB3C8)),
+            style: TextStyle(fontSize: 10, color: Colors.grey),
           ),
         ],
       ),
@@ -198,9 +196,9 @@ class _TripHistoryViewState extends State<TripHistoryView> {
         return Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: const Color(0xFF16212B),
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: const Color(0xFF1F2A37)),
+            color: Colors.black,
+            borderRadius: BorderRadius.circular(4),
+            border: Border.all(color: const Color(0xFF333333)),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -210,18 +208,18 @@ class _TripHistoryViewState extends State<TripHistoryView> {
                 children: [
                   Text(
                     DateFormat('E, MMM d').format(DateTime.fromMillisecondsSinceEpoch(trip.startTime)),
-                    style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, fontFamily: 'monospace', color: Color(0xFF00E676)),
+                    style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white),
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF16212B),
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: const Color(0xFF1F2A37)),
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(4),
+                      border: Border.all(color: const Color(0xFF333333)),
                     ),
                     child: Text(
-                      '\${(trip.durationSeconds / 60).round()} mins',
-                      style: const TextStyle(fontSize: 9, fontFamily: 'monospace', color: Color(0xFF9FB3C8)),
+                      '${(trip.durationSeconds / 60).round()} mins',
+                      style: const TextStyle(fontSize: 9, color: Colors.grey),
                     ),
                   ),
                 ],
@@ -229,7 +227,7 @@ class _TripHistoryViewState extends State<TripHistoryView> {
               const SizedBox(height: 12),
               Text(
                 trip.title,
-                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xFFE6F1FF)),
+                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white),
               ),
               const SizedBox(height: 16),
               Row(
@@ -238,16 +236,16 @@ class _TripHistoryViewState extends State<TripHistoryView> {
                     child: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF16212B),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: const Color(0xFF1F2A37)),
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(4),
+                        border: Border.all(color: const Color(0xFF333333)),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('DISTANCE', style: TextStyle(fontSize: 8, fontFamily: 'monospace', color: Color(0xFF9FB3C8))),
+                          const Text('DISTANCE', style: TextStyle(fontSize: 8, color: Colors.grey)),
                           const SizedBox(height: 4),
-                          Text('\${trip.distanceKm.toStringAsFixed(1)} km', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFFE6F1FF))),
+                          Text('${trip.distanceKm.toStringAsFixed(1)} km', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white)),
                         ],
                       ),
                     ),
@@ -257,16 +255,16 @@ class _TripHistoryViewState extends State<TripHistoryView> {
                     child: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF16212B),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: const Color(0xFF1F2A37)),
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(4),
+                        border: Border.all(color: const Color(0xFF333333)),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('IDLE WASTED', style: TextStyle(fontSize: 8, fontFamily: 'monospace', color: Color(0xFF9FB3C8))),
+                          const Text('IDLE WASTED', style: TextStyle(fontSize: 8, color: Colors.grey)),
                           const SizedBox(height: 4),
-                          Text('Rs. \${trip.idleCost.toStringAsFixed(2)}', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFFFFC107))),
+                          Text('Rs. ${trip.idleCost.toStringAsFixed(2)}', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white)),
                         ],
                       ),
                     ),
@@ -277,26 +275,26 @@ class _TripHistoryViewState extends State<TripHistoryView> {
               Container(
                 padding: const EdgeInsets.only(top: 8),
                 decoration: const BoxDecoration(
-                  border: Border(top: BorderSide(color: Color(0xFF1F2A37))),
+                  border: Border(top: BorderSide(color: Color(0xFF333333))),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     RichText(
                       text: TextSpan(
-                        style: const TextStyle(fontSize: 9, fontFamily: 'monospace', color: Color(0xFF9FB3C8)),
+                        style: const TextStyle(fontSize: 9, color: Colors.grey),
                         children: [
                           const TextSpan(text: 'Total Spend: '),
-                          TextSpan(text: 'Rs. \${trip.totalCost.toStringAsFixed(2)}', style: const TextStyle(fontWeight: FontWeight.bold, color: Color(0xFFE6F1FF))),
+                          TextSpan(text: 'Rs. ${trip.totalCost.toStringAsFixed(2)}', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
                         ],
                       ),
                     ),
                     RichText(
                       text: TextSpan(
-                        style: const TextStyle(fontSize: 9, fontFamily: 'monospace', color: Color(0xFF9FB3C8)),
+                        style: const TextStyle(fontSize: 9, color: Colors.grey),
                         children: [
                           const TextSpan(text: 'Idle Fuel: '),
-                          TextSpan(text: '\${trip.idleFuelLiters.toStringAsFixed(2)}L', style: const TextStyle(fontWeight: FontWeight.bold, color: Color(0xFFFFC107))),
+                          TextSpan(text: '${trip.idleFuelLiters.toStringAsFixed(2)}L', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
                         ],
                       ),
                     ),
@@ -307,26 +305,26 @@ class _TripHistoryViewState extends State<TripHistoryView> {
               Container(
                 padding: const EdgeInsets.only(top: 12),
                 decoration: const BoxDecoration(
-                  border: Border(top: BorderSide(color: Color(0xFF1F2A37))),
+                  border: Border(top: BorderSide(color: Color(0xFF333333))),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
                       children: [
-                        Text('ECO: \${trip.ecoScore}', style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, fontFamily: 'monospace', color: Color(0xFF00E676))),
+                        Text('ECO: ${trip.ecoScore}', style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white)),
                         const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 8),
-                          child: Text('|', style: TextStyle(color: Color(0xFF9FB3C8), fontSize: 10)),
+                          child: Text('|', style: TextStyle(color: Colors.grey, fontSize: 10)),
                         ),
-                        Text('SAFE: \${trip.safetyScore}', style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, fontFamily: 'monospace', color: Color(0xFF00B8D4))),
+                        Text('SAFE: ${trip.safetyScore}', style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white)),
                       ],
                     ),
                     Row(
                       children: [
-                        const Icon(LucideIcons.shieldCheck, size: 12, color: Color(0xFFFF5252)),
+                        const Icon(LucideIcons.shieldCheck, size: 12, color: Colors.white),
                         const SizedBox(width: 4),
-                        Text('\${trip.hardBrakes + trip.hardAccelerations} events', style: const TextStyle(fontSize: 10, fontFamily: 'monospace', color: Color(0xFFFF5252))),
+                        Text('${trip.hardBrakes + trip.hardAccelerations} events', style: const TextStyle(fontSize: 10, color: Colors.white)),
                       ],
                     ),
                   ],
